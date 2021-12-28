@@ -1,0 +1,40 @@
+{
+  "flavors": [
+    {
+      "id": 1,
+      "type": "cookies",
+      "name": "Chocolate Chip",
+      "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"
+    },
+    {
+      "id": 2,
+      "type": "pie",
+      "name": "Apple",
+      "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"
+    },
+    {
+      "id": 3,
+      "type": "cheesecake",
+      "name": "Key Lime",
+      "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"
+    },
+    {
+      "id": 4,
+      "type": "bars",
+      "name": "Pecan",
+      "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"
+    },
+    {
+      "id": 5,
+      "type": "cookies",
+      "name": "Peanut Butter",
+      "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"
+    },
+    {
+      "id": 6,
+      "type": "cookies",
+      "name": "Oatmeal Raisin",
+      "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"
+    }
+  ]
+}
