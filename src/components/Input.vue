@@ -50,12 +50,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .form__group {
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
-  /* width: 50%; */
 }
 
 .form__field {
@@ -65,10 +64,10 @@ export default {
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
   font-size: 1.3rem;
-  color: #a575ba;
+  color: $dark-purple;
   padding: 7px 0;
   background: transparent;
-  transition: border-color 0.2s;
+  transition: border-bottom 0.2s ease-out;
 }
 .form__textarea {
   max-width: 100%;
@@ -90,7 +89,7 @@ export default {
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: #c8afd3;
+  color: $light-purple;
 }
 
 .form__field:focus ~ .form__label {
@@ -99,14 +98,15 @@ export default {
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: #a575ba;
+  color: $dark-purple;
   font-weight: 700;
+  transform: translateY(-3px);
 }
 .form__field:focus {
   padding-bottom: 6px;
   font-weight: 700;
   border-width: 3px;
-  border-image: linear-gradient(to right, #a575ba, #c8afd3);
+  border-image: linear-gradient(to right, $dark-purple, $light-purple);
   border-image-slice: 1;
 }
 /* reset input */

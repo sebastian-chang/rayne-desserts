@@ -15,15 +15,40 @@
           </li>
         </ul>
       </div>
-      <div class="contact-form">
-        <form @submit.prevent="handleSubmit">
-          <h4>Contact Form</h4>
-          <Input :name="'Name'" :label="'Name'" :required="true" />
-          <Input :name="'Email'" :label="'Email'" :required="true" />
-          <Input :name="'Phone'" :label="'Phone'" :required="false" />
-          <Input :type="'textarea'" :name="'Messages'" :label="'Message'" :required="true" />
-          <Button :label="'Send'" :color="'#c8afd3'" :size="md"  />
-          <button>Send</button>
+      <div class="contact-form-section">
+        <h4>Contact Form</h4>
+        <form @submit.prevent="handleSubmit" class="contact-form">
+          <Input
+            class="contact-form-input"
+            :name="'Name'"
+            :label="'Name'"
+            :required="true"
+          />
+          <Input
+            class="contact-form-input"
+            :name="'Email'"
+            :label="'Email'"
+            :required="true"
+          />
+          <Input
+            class="contact-form-input"
+            :name="'Phone'"
+            :label="'Phone'"
+            :required="false"
+          />
+          <Input
+            id="contact-form-message"
+            :type="'textarea'"
+            :name="'Messages'"
+            :label="'Message'"
+            :required="true"
+          />
+          <Button
+            id="contact-submit-button"
+            :label="'Send'"
+            :color="'#c8afd3'"
+            :size="'md'"
+          />
         </form>
       </div>
     </div>
@@ -50,8 +75,8 @@ export default {
 }
 </script>
 
-<style>
-.contact{
+<style lang="scss">
+.contact {
   width: 90vw;
   margin: auto;
 }
@@ -70,7 +95,6 @@ export default {
 }
 .contact-cards {
   width: 70vw;
-  /* margin: 0 auto; */
 }
 .contact-cards > * {
   grid: 0em;
@@ -86,14 +110,38 @@ export default {
   padding-left: 0px;
   /* grid-template-columns: repeat(3, 1fr); */
 }
-.contact-form{
-  width: 60vw;
+.contact-form-section {
+  // width: 60vw;
   margin: 0 auto;
   margin-top: 35px;
   padding: 15px;
+  h4 {
+    font-family: "Marck Script", cursive;
+    font-weight: 400;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
 }
-.contact-form h4 {
-  margin-top: 10px;
-  margin-bottom: 15px;
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+
+  #contact-form-message {
+    grid-column: 1/4;
+  }
+
+  #contact-submit-button {
+    padding: 10px 20px;
+    width: 240px;
+    grid-column: 2/3;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .contact-form-input {
+    max-width: 340px;
+    grid-column: 1/4;
+  }
 }
 </style>

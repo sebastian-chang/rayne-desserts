@@ -1,5 +1,5 @@
 <template>
-  <button class="my-button" :style="cssVars">{{ label }}</button>
+  <button class="my-button" :style="cssVars()">{{ label }}</button>
 </template>
 
 <script>
@@ -7,7 +7,10 @@ export default {
   props: ['label', 'color', 'size'],
   setup (props) {
     const cssVars = () => {
-      return { '--button-bg-color': props.size === 'md' ? '#FC4' : '#CCC' }
+      return {
+        '--button-bg-color': props.color !== '' ? props.color : '#CCC',
+        '--button-fg-color': props.color !== ''? 'white' : 'black'
+         }
     }
     return { cssVars }
   }
@@ -20,5 +23,6 @@ export default {
   border-radius: 8px;
   border: 0;
   background-color: var(--button-bg-color);
+  color: var(--button-fg-color);
 }
 </style>
