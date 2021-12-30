@@ -61,8 +61,11 @@ export default {
   border: 1px solid #c8afd3;
   border-radius: 5px;
   padding: 25px;
+  margin:15px;
+  max-width: 275px;
   text-align: left;
   transition: all 0.3s linear;
+  overflow-wrap: break-word;
 }
 .contact-icon {
   display: inline-block;
@@ -82,12 +85,6 @@ export default {
 }
 .contact-card:hover .contact-icon{
   background: #a575ba;
-  height: 55px;
-  width: 55px;
-}
-.contact-card:hover .contact-label,
-.contact-card:hover .contact-text{
-  font-size: 21px;
 }
 .contact-label {
   letter-spacing: 0;

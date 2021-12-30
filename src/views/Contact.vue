@@ -15,14 +15,17 @@
           </li>
         </ul>
       </div>
-      <form @submit.prevent="handleSubmit">
-        <h4>Contact Form</h4>
-        <input type="text" placeholder="Name" v-model="name" required />
-        <input type="text" placeholder="Email" v-model="email" required />
-        <input type="text" placeholder="Phone Number" v-model="phone" />
-        <textarea placeholder="Message" v-model="message" required />
-        <button>Send</button>
-      </form>
+      <div class="contact-form">
+        <form @submit.prevent="handleSubmit">
+          <h4>Contact Form</h4>
+          <Input :name="'Name'" :label="'Name'" :required="true" />
+          <Input :name="'Email'" :label="'Email'" :required="true" />
+          <Input :name="'Phone'" :label="'Phone'" :required="false" />
+          <Input :type="'textarea'" :name="'Messages'" :label="'Message'" :required="true" />
+          <Button :label="'Send'" :color="'#c8afd3'" :size="md"  />
+          <button>Send</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -30,8 +33,10 @@
 <script>
 import { ref } from 'vue'
 import ContactCard from '../components/ContactCard.vue'
+import Input from '../components/Input.vue'
+import Button from '../components/Button.vue'
 export default {
-  components: { ContactCard },
+  components: { ContactCard, Input, Button },
   setup () {
     const name = ref('')
     const email = ref('')
@@ -46,19 +51,26 @@ export default {
 </script>
 
 <style>
+.contact{
+  width: 90vw;
+  margin: auto;
+}
 .contact-header {
   font-family: "Marck Script", cursive;
   font-weight: 400;
   font-size: 24px;
+  text-align: center;
 }
 .contact-section {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
 }
 .contact-cards {
   width: 70vw;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 .contact-cards > * {
   grid: 0em;
@@ -70,6 +82,18 @@ export default {
   grid-auto-flow: row dense;
   width: 100%;
   list-style: none;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  padding-left: 0px;
+  /* grid-template-columns: repeat(3, 1fr); */
+}
+.contact-form{
+  width: 60vw;
+  margin: 0 auto;
+  margin-top: 35px;
+  padding: 15px;
+}
+.contact-form h4 {
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 </style>

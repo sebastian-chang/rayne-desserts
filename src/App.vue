@@ -20,7 +20,19 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Nunito+Sans:wght@400;600;700&display=swap");
 
+.content {
+  min-height: calc(100vh - 140px);
+}
+html,
+body {
+  overflow: none;
+  margin-left: 0px;
+}
 #app {
+  height: 100vh;
+  width: 100vw;
+}
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -39,5 +51,5 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>
