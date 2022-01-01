@@ -21,28 +21,13 @@
           <Input
             class="contact-form-input"
             :name="'Name'"
-            :label="'Name'"
+            :type="'text'"
             :required="true"
           />
-          <Input
-            class="contact-form-input"
-            :name="'Email'"
-            :label="'Email'"
-            :required="true"
-          />
-          <Input
-            class="contact-form-input"
-            :name="'Phone'"
-            :label="'Phone'"
-            :required="false"
-          />
-          <Input
-            id="contact-form-message"
-            :type="'textarea'"
-            :name="'Messages'"
-            :label="'Message'"
-            :required="true"
-          />
+          <Input class="contact-form-input" :type="'phone'" :required="false" />
+          <Input class="contact-form-input" :type="'email'" :required="true" />
+          <Input id="contact-form-message" :type="'textarea'" />
+
           <Button
             id="contact-submit-button"
             :label="'Send'"
@@ -58,10 +43,15 @@
 <script>
 import { ref } from 'vue'
 import ContactCard from '../components/ContactCard.vue'
-import Input from '../components/Input.vue'
 import Button from '../components/Button.vue'
+import Input from '../components/Input.vue'
+
 export default {
-  components: { ContactCard, Input, Button },
+  components: {
+    ContactCard,
+    Input,
+    Button,
+  },
   setup () {
     const name = ref('')
     const email = ref('')
@@ -75,7 +65,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .contact {
   width: 90vw;
   margin: auto;
@@ -108,10 +98,9 @@ export default {
   list-style: none;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   padding-left: 0px;
-  /* grid-template-columns: repeat(3, 1fr); */
 }
 .contact-form-section {
-  // width: 60vw;
+  width: 70%;
   margin: 0 auto;
   margin-top: 35px;
   padding: 15px;
@@ -139,9 +128,23 @@ export default {
   }
 }
 @media only screen and (max-width: 576px) {
+  .contact-form {
+    margin-top: 40px;
+  }
+  .contact-form-section {
+    width: 100%;
+    text-align: center;
+  }
+  .contact-cards {
+    width: 100%;
+  }
   .contact-form-input {
-    max-width: 340px;
     grid-column: 1/4;
+    margin: 0 auto;
+  }
+  #contact-form-message {
+    margin: 0 auto;
+    max-width: 210px;
   }
 }
 </style>
