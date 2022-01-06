@@ -46,6 +46,21 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    name: "Instagram",
+    beforeEnter () { window.open('https://www.instagram.com/raynedesserts/', '_blank')},
+
+  },
+  {
+    name: "Facebook",
+    beforeEnter () { window.open('https://www.facebook.com/raynedesserts/', '_blank') },
+
+  },
+  {
+    name: "Youtube",
+    beforeEnter () { window.open('https://www.youtube.com/raynedesserts/', '_blank') },
+
+  },
 ];
 
 const router = createRouter({

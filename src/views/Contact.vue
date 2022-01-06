@@ -107,7 +107,7 @@ export default {
   h4 {
     font-family: "Marck Script", cursive;
     font-weight: 400;
-    font-size: 24px;
+    font-size: $SB_H4_Font_Size;
     margin-top: 10px;
     margin-bottom: 15px;
   }
@@ -130,6 +130,7 @@ export default {
 @media only screen and (max-width: 576px) {
   .contact-form {
     margin-top: 40px;
+    gap: 30px 0px;
   }
   .contact-form-section {
     width: 100%;

@@ -21,7 +21,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Nunito+Sans:wght@400;600;700&display=swap");
 
 .content {
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 200px);
 }
 html,
 body {
