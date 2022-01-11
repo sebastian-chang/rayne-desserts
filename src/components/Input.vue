@@ -41,6 +41,8 @@
       :placeholder="inputPlaceholder"
       v-model="inputText"
       autocomplete="off"
+      @keypress="phoneValidation($event)"
+      @input="phoneMask()"
       required
     />
     <!-- Textarea input -->
@@ -50,6 +52,7 @@
       name="{name}"
       cols="30"
       rows="10"
+      v-model="inputText"
       required
     ></textarea>
     <span class="highlight"></span>
@@ -59,7 +62,7 @@
 </template>
 
 <script>
-import { ref, toRef } from '@vue/reactivity'
+import { ref, toRef, } from '@vue/reactivity'
 export default {
   props: ['type', 'name', 'required'],
   setup (props) {
@@ -67,13 +70,19 @@ export default {
     const inputLabel = ref('')
     const inputPlaceholder = ref('')
 
+    const phoneRegex = /^[0-9\s]*$/;
+    const threeDigitRegex = /^(\d{3})$/gm
+    const sixDigitRegex = /^(\d{3})(\d{1,3})$/gm
+    const tenDigitRegex = /^(\d{3})(\d{3})(\d{1,4})$/gm
+    const twelveDigitRegex = /^(\d{1,3})(\d{3})(\d{3})(\d{4})$/gm
+
     if (props.type === 'text') {
       const temp = toRef(props.name)._object
       inputPlaceholder.value = temp
       inputLabel.value = temp
     }
     else if (props.type === 'phone') {
-      inputPlaceholder.value = '1234567890'
+      inputPlaceholder.value = '(123) 456-7890'
       inputLabel.value = 'Phone'
     }
     else if (props.type === 'email') {
@@ -84,7 +93,34 @@ export default {
       inputLabel.value = 'Message'
     }
 
-    return { inputText, inputLabel, inputPlaceholder }
+    const phoneValidation = event => {
+      if (phoneRegex.test(event.key)) {
+        return true
+      }
+      else {
+        event.preventDefault()
+        return false
+      }
+    }
+    const phoneMask = () => {
+      const cleanPhoneText = inputText.value.replace(/\D/gm, '')
+      let maskPhoneText = ''
+      if (cleanPhoneText.length <= 3) {
+        maskPhoneText = cleanPhoneText.replace(threeDigitRegex, "($1)")
+      }
+      else if (cleanPhoneText.length > 3 && cleanPhoneText.length < 7) {
+        maskPhoneText = cleanPhoneText.replace(sixDigitRegex, "($1) $2")
+      }
+      else if (cleanPhoneText.length >= 7 && cleanPhoneText.length <= 10) {
+        maskPhoneText = cleanPhoneText.replace(tenDigitRegex, "($1) $2-$3")
+      }
+      else {
+        maskPhoneText = cleanPhoneText.replace(twelveDigitRegex, "+$1 ($2) $3-$4")
+      }
+      inputText.value = maskPhoneText
+    }
+
+    return { inputText, inputLabel, inputPlaceholder, phoneValidation, phoneMask }
   }
 
 }
@@ -188,51 +224,4 @@ label {
     left: 0%;
   }
 }
-
-// BUTTONS // ============================== //
-// .btn {
-//   background: #fff;
-//   color: mix(black, $muted-color, 25%);
-//   border: none;
-//   padding: 10px 20px;
-//   border-radius: 3px;
-//   letter-spacing: 0.06em;
-//   text-transform: uppercase;
-//   text-decoration: none;
-//   outline: none;
-//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-//   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-//   &:hover {
-//     color: mix(black, $muted-color, 30%);
-//     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
-//   }
-//   &.btn-link {
-//     background: $hl-color;
-//     color: mix(white, $hl-color, 80%);
-//     &:hover {
-//       background: darken($hl-color, 5%);
-//       color: mix(white, $hl-color, 85%);
-//     }
-//   }
-//   &.btn-submit {
-//     background: $hl-color;
-//     color: mix(white, $hl-color, 70%);
-//     &:hover {
-//       background: darken($hl-color, 5%);
-//       color: mix(white, $hl-color, 85%);
-//     }
-//   }
-//   &.btn-cancel {
-//     background: #eee;
-//     &:hover {
-//       background: darken(#eee, 5%);
-//       color: mix(black, $muted-color, 30%);
-//     }
-//   }
-// }
-
-// .btn-box {
-//   text-align: center;
-//   margin: 50px 0;
-// }
 </style>

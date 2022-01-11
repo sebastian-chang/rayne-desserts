@@ -36,5 +36,44 @@
       "name": "Oatmeal Raisin",
       "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"
     }
+  ],
+  "faq": [
+    {
+      "category": "Order",
+      "questions": [
+        {
+          "question": "How can I place an order?",
+          "answer": "Please call, email or fill out our contact form.",
+          "id": 1
+        },
+        {
+          "question": "How long does it take to get my order?",
+          "answer": "Orders are normally forfilled within a few days. Lorem ipsum dolor sit amet consectetur, adipisicing elit. In facere nam nihil ea magnam aut modi eos corrupti veritatis. Quasi.",
+          "id": 2
+        },
+        {
+          "question": "I want an order for today, is that possible?",
+          "answer": "Orders are made to order, it takes us time to create the best treats for you.",
+          "id": 3
+        }
+      ],
+      "id": 1
+    },
+    {
+      "category": "Delivery",
+      "questions": [
+        {
+          "question": "Do you deliver?",
+          "answer": "Absolutely, delivery is what we‘re all about!",
+          "id": 1
+        },
+        {
+          "question": "How long does a delivery normally take?",
+          "answer": "Depending on location, we'll give you the best estimate.",
+          "id": 2
+        }
+      ],
+      "id": 2
+    }
   ]
 }

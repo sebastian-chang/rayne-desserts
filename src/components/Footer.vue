@@ -17,7 +17,7 @@
             </h3>
           </div>
           <div class="contact footer-item text-area">
-            <h3 class="footer-header user-link" @click="onUserClick('Contact')">
+            <h3 class="footer-header user-link" @click="onUserClick('FAQ')">
               FAQ
             </h3>
           </div>

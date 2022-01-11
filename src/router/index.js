@@ -5,6 +5,7 @@ import Weddings from '../views/Weddings.vue'
 import Gallery from '../views/Gallery.vue'
 import Reviews from '../views/Reviews.vue'
 import Contact from '../views/Contact.vue'
+import FAQ from '../views/FAQ.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/contact',
     name: 'Contact',
     component: Contact,
+  },
+  {
+    path: '/faq',
+    name: 'FAQ',
+    component: FAQ,
   },
   {
     path: "/about",
