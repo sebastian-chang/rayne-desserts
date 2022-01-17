@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Menu from '../views/Menu.vue'
 import Flavors from '../views/Flavors.vue'
 import Weddings from '../views/Weddings.vue'
 import Gallery from '../views/Gallery.vue'
@@ -12,6 +13,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/menu",
+    name: "Menu",
+    component: Menu,
   },
   {
     path: '/flavors',
@@ -54,7 +60,7 @@ const routes = [
   },
   {
     name: "Instagram",
-    beforeEnter () { window.open('https://www.instagram.com/raynedesserts/', '_blank')},
+    beforeEnter () { window.open('https://www.instagram.com/raynedesserts/', '_blank') },
 
   },
   {

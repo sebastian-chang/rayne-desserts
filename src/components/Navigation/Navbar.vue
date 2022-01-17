@@ -4,12 +4,12 @@
       <nav>
         <div>
           <router-link :to="{ name: 'Home' }">
-            <img class="logo" src="../assets/R.jpg" />
+            <img class="logo" src="../../assets/R.jpg" />
             <!-- Rayne Desserts -->
           </router-link>
         </div>
         <div class="links">
-          <router-link :to="{ name: 'Home' }"> Menu </router-link>
+          <router-link :to="{ name: 'Menu' }"> Menu </router-link>
           <router-link :to="{ name: 'Flavors' }"> Flavors </router-link>
           <router-link :to="{ name: 'Weddings' }"> Weddings </router-link>
           <router-link :to="{ name: 'Gallery' }"> Gallery </router-link>

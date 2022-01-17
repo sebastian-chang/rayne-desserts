@@ -73,7 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-  background-image: url("../assets/DSC_1593.NEF.jpg");
+  background-image: url("../../assets/DSC_1593.NEF.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

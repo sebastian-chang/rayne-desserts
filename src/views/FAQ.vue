@@ -33,7 +33,7 @@ export default {
     })
 
     onMounted(async () => {
-      const res = await fetch('http://localhost:3000/faq')
+      const res = await fetch(`${process.env.VUE_APP_BASE_API}/faq`)
       const data = await res.json()
       faqData.categories = data
       isLoading.value = false

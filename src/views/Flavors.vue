@@ -19,7 +19,7 @@ export default {
     })
     const isLoading = ref(true)
     onMounted(async () => {
-      const res = await fetch('http://localhost:3000/flavors')
+      const res = await fetch(`${process.env.VUE_APP_BASE_API}/flavors`)
       // flavors.value = await res.json()
       const data = await res.json()
       console.log('THIS IS DATA', data)
