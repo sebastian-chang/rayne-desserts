@@ -1,15 +1,11 @@
 <template>
   <div class="contact-card">
-    <div v-if="card.label !== ''">
+    <div v-if="card.label !== ''" @click="onUserClick(card.label)" class="cursor">
       <div class="contact-icon">
         <FontAwesomeIcon :icon="card.icon" />
       </div>
-      <h5 class="contact-label">
-        {{ card.label }}
-      </h5>
-      <p class="contact-text">
-        {{ card.text }}
-      </p>
+      <h5 class="contact-label">{{ card.label }}</h5>
+      <p class="contact-text">{{ card.text }}</p>
     </div>
     <div v-else>...Loading</div>
   </div>
@@ -19,15 +15,18 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPhoneAlt, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { onMounted, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   components: { FontAwesomeIcon },
   props: ['cardStyle'],
   setup (style) {
+    const router = useRouter()
     const card = reactive({
       icon: '',
       label: '',
       text: '',
     })
+
     onMounted(() => {
       if (style.cardStyle === 'address') {
         Object.assign(card, {
@@ -40,28 +39,32 @@ export default {
         Object.assign(card, {
           icon: faPhoneAlt,
           label: 'Phone',
-          text: '832-445-4222'
+          text: process.env.VUE_APP_PHONE
         })
       }
       else if (style.cardStyle === 'email') {
         Object.assign(card, {
           icon: faEnvelope,
           label: 'Email',
-          text: 'info@raynedesserts.com'
+          text: process.env.VUE_APP_EMAIL
         })
       }
     })
-    return { card }
+
+    const onUserClick = (linkTo) => {
+      router.push({name: linkTo})
+    }
+    return { card, onUserClick }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .contact-card {
-  border: 1px solid #c8afd3;
+  border: 1px solid $light-purple;
   border-radius: 5px;
   padding: 25px;
-  margin:15px;
+  margin: 15px;
   max-width: 275px;
   text-align: left;
   transition: all 0.3s linear;
@@ -69,7 +72,7 @@ export default {
 }
 .contact-icon {
   display: inline-block;
-  background: #c8afd3;
+  background: $light-purple;
   color: white;
   font-size: 20px;
   text-align: center;
@@ -80,11 +83,11 @@ export default {
   border-radius: 5px;
   transition: all 0.3s linear;
 }
-.contact-card:hover{
-  border: 1px solid #a575ba;
+.contact-card:hover {
+  border: 1px solid $dark-purple;
 }
-.contact-card:hover .contact-icon{
-  background: #a575ba;
+.contact-card:hover .contact-icon {
+  background: $dark-purple;
 }
 .contact-label {
   letter-spacing: 0;

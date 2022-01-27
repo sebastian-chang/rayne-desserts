@@ -89,7 +89,6 @@ div {
   border-bottom: #eae8e4 1px solid;
   border-bottom: 1px solid #eae8e4;
 }
-.faq-subsection-title[aria-expanded="true"],
 .faq-subsection-title.target-on,
 .isActive {
   font-weight: 700;

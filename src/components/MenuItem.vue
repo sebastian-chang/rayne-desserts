@@ -1,7 +1,7 @@
 <template>
   <div class="product_card">
     <div class="product_card_info_wrapper">
-      <div class="product_card_info">
+      <div class="product_card_info" @click="onUserClick()">
         <h6 class="product_card_name list_label">{{ item.name }}</h6>
         <span class="product_card_body body-xs">{{ item.description }}</span>
       </div>
@@ -23,16 +23,22 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'
 import { ref } from '@vue/reactivity'
+import { useRouter } from 'vue-router'
 export default {
-  props: ['item'],
+  props: ['item', 'cat'],
   components: { Carousel, FontAwesomeIcon },
-  setup () {
+  setup (props) {
     const favorite = ref(false)
+    const router = useRouter()
 
     const addFavorite = () => {
       favorite.value = !favorite.value
     }
-    return { heart: farHeart, liked: fasHeart, favorite, addFavorite }
+    const onUserClick = () => {
+      console.log('PROPS', typeof (props.item.id), typeof (props.cat))
+      router.push({ name: 'Product', params: { slug: `${props.cat}-${props.item.name}-${props.item.id}` } })
+    }
+    return { heart: farHeart, liked: fasHeart, favorite, addFavorite, onUserClick }
   }
 }
 </script>
@@ -51,8 +57,8 @@ export default {
 
   // flex-direction: row;
   // flex-wrap: wrap;
-  &:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 }
 .product_card_info_wrapper {
@@ -98,46 +104,9 @@ export default {
   background: transparent;
   border: none;
 }
-// .lv-product-add-to-wishlist__button {
-//   display: flex;
-// }
-// [dir] .lv-icon-button {
-//   padding: 0;
-//   transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
-// }
-// [dir] .lv-button,
-// [dir] .lv-chip-button,
-// [dir] .lv-icon-button {
-//   text-align: center;
-//   cursor: pointer;
-// }
-// .lv-icon-button {
-//   box-sizing: border-box;
-//   width: 2rem;
-//   height: 2rem;
-// }
-// .lv-button.-with-icon,
-// .lv-icon-button {
-//   display: inline-flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-// .lv-button,
-// .lv-chip-button,
-// .lv-icon-button {
-//   text-decoration: none;
-// }
-// [dir] button {
-//   border: 0;
-//   margin: 0;
-//   padding: 0;
-//   background: transparent;
-//   cursor: pointer;
-//   text-align: inherit;
-// }
 
-.product_card .product_favorite,
-.product_card .product_favorite_like {
+.product_card .product_favorite {
+  // .product_card .product_favorite_like {
   width: auto;
   position: absolute;
   top: 1rem;

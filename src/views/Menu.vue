@@ -2,8 +2,8 @@
   <div class="default_layout_content" v-if="!isLoading">
     <div class="paginated_list">
       <ul class="menu_list category_grid">
-        <li class="category_list_item" v-for="item in state.menu.brownies" :key="item.id">
-          <MenuItem :item="item" />
+        <li class="category_list_item" v-for="item in filtered.items" :key="item.id">
+          <MenuItem :item="item" :cat="cat"/>
         </li>
       </ul>
     </div>
@@ -11,25 +11,36 @@
 </template>
 
 <script>
-import { reactive, ref } from '@vue/reactivity'
-import { onMounted } from '@vue/runtime-core'
+import { computed, reactive, ref } from '@vue/reactivity'
+import { onMounted, } from '@vue/runtime-core'
 import MenuItem from '../components/MenuItem.vue'
 export default {
   components: { MenuItem },
-  setup () {
+  props: ['cat'],
+  setup (props) {
     const state = reactive({
-      menu: null
+      menu: null,
     })
     const isLoading = ref(true)
 
     onMounted(async () => {
       const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu`)
       const data = await res.json()
-      state.menu = data[0]
+      state.menu = data
       isLoading.value = false
     })
 
-    return { state, isLoading }
+    const filtered = computed(() => {
+      if (props.cat !== 'all') {
+        return state.menu.filter(item => item.category === props.cat)[0]
+      }
+      else {
+        return { items: [].concat.apply([], state.menu.map(menu => menu.items)) }
+      }
+    }
+    )
+
+    return { state, isLoading, filtered }
   }
 }
 </script>

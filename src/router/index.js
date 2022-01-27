@@ -7,6 +7,7 @@ import Gallery from '../views/Gallery.vue'
 import Reviews from '../views/Reviews.vue'
 import Contact from '../views/Contact.vue'
 import FAQ from '../views/FAQ.vue'
+import Product from '../views/Product.vue'
 
 const routes = [
   {
@@ -15,9 +16,16 @@ const routes = [
     component: Home,
   },
   {
-    path: "/menu",
+    path: "/menu/:cat",
     name: "Menu",
     component: Menu,
+    props: true,
+  },
+  {
+    path: "/products/:slug",
+    name: "Product",
+    component: Product,
+    props: true,
   },
   {
     path: '/flavors',
@@ -61,17 +69,37 @@ const routes = [
   {
     name: "Instagram",
     beforeEnter () { window.open('https://www.instagram.com/raynedesserts/', '_blank') },
-
+    component: Home,
   },
   {
     name: "Facebook",
     beforeEnter () { window.open('https://www.facebook.com/raynedesserts/', '_blank') },
-
+    component: Home,
   },
   {
     name: "Youtube",
     beforeEnter () { window.open('https://www.youtube.com/raynedesserts/', '_blank') },
-
+    component: Home,
+  },
+  {
+    name: "WeddingWire",
+    beforeEnter () { window.open('https://www.weddingwire.com/biz/rayne-desserts/e0568849f5677f01.html', '_blank') },
+    component: Home,
+  },
+  {
+    name: "Phone",
+    beforeEnter () { location.href = ('tel:' + process.env.VUE_APP_PHONE) },
+    component: Contact,
+  },
+  {
+    name: "Email",
+    beforeEnter () { location.href = ('mailTo:' + process.env.VUE_APP_EMAIL) },
+    component: Contact,
+  },
+  {
+    name: "Address",
+    beforeEnter () { window.open(process.env.VUE_APP_GOOGLE_LOCATION, '_blank') },
+    component: Contact,
   },
 ];
 

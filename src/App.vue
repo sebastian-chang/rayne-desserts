@@ -32,6 +32,10 @@ body {
   height: 100vh;
   width: 100vw;
 }
+.cursor{
+  cursor: pointer;
+  user-select: none;
+}
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

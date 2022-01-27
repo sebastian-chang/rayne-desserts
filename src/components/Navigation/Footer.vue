@@ -12,12 +12,12 @@
             </p>
           </div>
           <div class="contact footer-item text-area">
-            <h3 class="footer-header user-link" @click="onUserClick('Contact')">
+            <h3 class="footer-header cursor" @click="onUserClick('Contact')">
               Contact Us
             </h3>
           </div>
           <div class="contact footer-item text-area">
-            <h3 class="footer-header user-link" @click="onUserClick('FAQ')">
+            <h3 class="footer-header cursor" @click="onUserClick('FAQ')">
               FAQ
             </h3>
           </div>
@@ -26,17 +26,17 @@
             <FontAwesomeIcon
               @click="onUserClick('Instagram')"
               :icon="instagram"
-              class="social-icons user-link"
+              class="social-icons cursor"
             />
             <FontAwesomeIcon
               @click="onUserClick('Facebook')"
               :icon="facebook"
-              class="social-icons user-link"
+              class="social-icons cursor"
             />
             <FontAwesomeIcon
               @click="onUserClick('Youtube')"
               :icon="youtube"
-              class="social-icons user-link"
+              class="social-icons cursor"
             />
           </div>
         </div>
@@ -65,6 +65,7 @@ export default {
     const router = useRouter()
     const onUserClick = (linkTo) => {
       router.push({ name: linkTo })
+      window.scrollTo(0,0);
     }
     return { instagram: faInstagram, facebook: faFacebookF, email: faEnvelope, address: faMapMarkerAlt, phone: faPhoneAlt, youtube: faYoutube, onUserClick }
   }
@@ -162,7 +163,6 @@ export default {
     color: $light_purple;
     --webkit-filter: drop-shadow(1px 1px 5px $dark_purple);
     filter: drop-shadow(1px 1px 5px $dark_purple);
-    cursor: pointer;
   }
 }
 
