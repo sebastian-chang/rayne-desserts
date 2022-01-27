@@ -65,7 +65,7 @@ export default {
     const router = useRouter()
     const onUserClick = (linkTo) => {
       router.push({ name: linkTo })
-      window.scrollTo(0,0);
+      // window.scrollTo(0,0);
     }
     return { instagram: faInstagram, facebook: faFacebookF, email: faEnvelope, address: faMapMarkerAlt, phone: faPhoneAlt, youtube: faYoutube, onUserClick }
   }
