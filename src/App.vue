@@ -18,7 +18,8 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Nunito+Sans:wght@400;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Nunito+Sans:wght@400;600;700&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Nunito+Sans:wght@400;600;700&family=Raleway:wght@400;600;700&display=swap');
 
 .content {
   min-height: calc(100vh - 200px);

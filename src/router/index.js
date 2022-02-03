@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Menu from '../views/Menu.vue'
 import Flavors from '../views/Flavors.vue'
 import Weddings from '../views/Weddings.vue'
+import Desserts from '../views/Desserts.vue'
 import Gallery from '../views/Gallery.vue'
 import Reviews from '../views/Reviews.vue'
 import Contact from '../views/Contact.vue'
@@ -36,6 +37,11 @@ const routes = [
     path: '/weddings',
     name: 'Weddings',
     component: Weddings,
+  },
+  {
+    path: '/desserts',
+    name: 'Desserts',
+    component: Desserts,
   },
   {
     path: '/gallery',

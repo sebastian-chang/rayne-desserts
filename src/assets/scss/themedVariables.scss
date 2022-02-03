@@ -1,0 +1,30 @@
+@import "./data.scss";
+
+$themes: (
+  wedding: (
+    main-color: $color-white,
+    serif-font: $SB_Main-Wedding,
+    secondary-color: $color-black-100,
+    cursive-font: $SB_Secondary-Wedding,
+    border-radius: 0px,
+    border: $color-white-off 2px solid,
+    nav-color: $color-black-100,
+    nav-color-highlight: $color-white-off,
+    heart-color: $color-black-100,
+    box-shadow: rgba(0, 0, 0, 0.2),
+    box-shadow-hover: rgba(0, 0, 0, 0.2),
+  ),
+  dessert: (
+    main-color: $color-purple-light,
+    serif-font: $SB_Main-Dessert,
+    secondary-color: $color-purple-dark,
+    cursive-font: $SB_Secondary-Dessert,
+    border-radius: 10px,
+    border: $color-purple-dark 2px dashed,
+    nav-color: $color-white,
+    nav-color-highlight: $color-purple-dark,
+    heart-color: $color-purple-light,
+    box-shadow: rgba(200, 175, 211, 0.2),
+    box-shadow-hover: rgba(165, 117, 186, 0.2),
+  ),
+);

@@ -57,52 +57,56 @@ export default {
 
 <style lang="scss" scoped>
 // carousel
-.product_card_carousel {
-  overflow: hidden;
-}
-.mini_slider_items {
-  white-space: nowrap;
-  transition: transform 0.3s ease;
-  list-style-type: none;
-  padding: 0;
-}
-.mini_slider_item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  min-width: 100%;
-  height: 100%;
-}
+@include rayne($themes) {
+  .product_card_carousel {
+    overflow: hidden;
+    border-radius: themed("border-radius");
+  }
+  .mini_slider_items {
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+    list-style-type: none;
+    padding: 0;
+    animation: infinite;
+  }
+  .mini_slider_item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    min-width: 100%;
+    height: 100%;
+  }
 
-.mini_slider_button-next,
-.mini_slider_button-prev {
-  top: 50%;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: absolute;
-  opacity: 0;
-  width: 3rem;
-  height: 3rem;
-  background: #fff;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.3s ease-in-out;
-}
-.mini_slider_button-next {
-  right: 0;
-}
-.product_card_carousel:hover .mini_slider_button-next,
-.product_card_carousel:hover .mini_slider_button-prev {
-  opacity: 1;
-}
-.smart_picture img {
-  display: block;
-  width: 100%;
-  object-fit: cover;
+  .mini_slider_button-next,
+  .mini_slider_button-prev {
+    top: 50%;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    opacity: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .mini_slider_button-next {
+    right: 0;
+  }
+  .product_card_carousel:hover .mini_slider_button-next,
+  .product_card_carousel:hover .mini_slider_button-prev {
+    opacity: 1;
+  }
+  .smart_picture img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 </style>

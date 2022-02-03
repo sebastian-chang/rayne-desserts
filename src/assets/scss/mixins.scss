@@ -1,0 +1,14 @@
+@import './themedVariables.scss';
+
+@mixin rayne($themes) {
+  @each $themeName, $map in $themes {
+    $myMap: $map !global;
+    .rayne-#{$themeName} {
+      @content;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($myMap, $key);
+}
