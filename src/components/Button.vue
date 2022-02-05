@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  props: ['label', 'color', 'size'],
+  props: ['label', 'color', 'size', 'disabled'],
   setup (props) {
     const cssVars = () => {
       return {
@@ -30,5 +30,8 @@ export default {
     background-color: var(--button-bg-color);
     color: var(--button-fg-color);
   }
+}
+.my-button:disabled {
+  background-color: lighten($dark-purple, 30%);
 }
 </style>

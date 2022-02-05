@@ -77,11 +77,13 @@
 </template>
 
 <script>
-import { ref, toRef, } from '@vue/reactivity'
+import { computed, ref, toRef, } from '@vue/reactivity'
+import userFormValidation from '../modules/userFormValidation.js'
+
 export default {
-  props: ['type', 'name', 'required'],
-  setup (props) {
-    const inputText = ref('')
+  props: ['type', 'name', 'required', 'modelValue'],
+  setup (props, { emit }) {
+    // const inputText = ref('')
     const inputLabel = ref('')
     const inputPlaceholder = ref('')
 
@@ -102,7 +104,7 @@ export default {
       inputLabel.value = temp
     }
     else if (props.type === 'phone') {
-      inputPlaceholder.value = '(123) 456-7890'
+      inputPlaceholder.value = '(800) 555-1234'
       inputLabel.value = 'Phone'
     }
     else if (props.type === 'email') {
@@ -140,7 +142,22 @@ export default {
       inputText.value = maskPhoneText
     }
 
-    return { inputText, inputLabel, inputPlaceholder, phoneMask, numberValidation }
+    const inputText = computed(({
+      get: () => props.modelValue,
+      set: (value) => emit('update:modelValue', value)
+    }))
+
+    // const error = ref('')
+    const { errors, validateNameField } = userFormValidation()
+
+    const validateInput = () => {
+      validateNameField('name', inputText.value)
+    }
+    // const error = computed(() => {
+    //   return inputText.value === '' ? 'The Input field is required' : ''
+    // })
+
+    return { inputText, inputLabel, inputPlaceholder, numberValidation, phoneMask, errors, validateInput }
   }
 
 }

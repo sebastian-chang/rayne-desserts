@@ -18,13 +18,35 @@
         </div>
         <div class="contact-form-section">
           <h4>Contact Form</h4>
-          <form @submit.prevent="handleSubmit" class="contact-form">
-            <Input class="contact-form-input" :name="'Name'" :type="'text'" :required="true" />
-            <Input class="contact-form-input" :type="'phone'" :required="false" />
-            <Input class="contact-form-input" :type="'email'" :required="true" />
-            <Input id="contact-form-message" :type="'textarea'" />
+          <form @submit.prevent="handleSubmit()" class="contact-form">
+            <Input
+              class="contact-form-input"
+              :name="'Name'"
+              :type="'text'"
+              :required="true"
+              v-model="contactMessage.name"
+            />
+            <Input
+              class="contact-form-input"
+              :type="'phone'"
+              :required="false"
+              v-model="contactMessage.phone"
+            />
+            <Input
+              class="contact-form-input"
+              :type="'email'"
+              :required="true"
+              v-model="contactMessage.email"
+            />
+            <Input id="contact-form-message" :type="'textarea'" v-model="contactMessage.message" />
 
-            <Button id="contact-submit-button" :label="'Send'" :color="'#c8afd3'" :size="'md'" />
+            <Button
+              id="contact-submit-button"
+              :label="'Send'"
+              :color="'#c8afd3'"
+              :size="'md'"
+              :disabled="isButtonDisabled"
+            />
           </form>
         </div>
       </div>
@@ -33,10 +55,15 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive, } from 'vue'
+import { useRouter } from 'vue-router'
 import ContactCard from '../components/ContactCard.vue'
 import Button from '../components/Button.vue'
 import Input from '../components/Input.vue'
+import emailjs from '@emailjs/browser'
+
+import useFormValidation from '../modules/userFormValidation.js'
+import useSubmitButtonState from '../modules/useSubmitButtonState.js'
 
 export default {
   components: {
@@ -45,14 +72,40 @@ export default {
     Button,
   },
   setup () {
-    const name = ref('')
-    const email = ref('')
-    const phone = ref('')
-    const message = ref('')
-    const handleSubmit = () => {
-      console.log('SUBMIT')
+    const contactMessage = reactive({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    })
+    const router = useRouter()
+
+    const { errors } = useFormValidation();
+    const { isButtonDisabled } = useSubmitButtonState(contactMessage, errors);
+
+    const handleSubmit = async () => {
+      const emailObj = {
+        userName: contactMessage.name,
+        email: contactMessage.email,
+        phone: contactMessage.phone,
+        message: contactMessage.message,
+      }
+      try {
+        const res = await emailjs.send(
+          process.env.VUE_APP_EMAILJS_SERVICE_ID,
+          process.env.VUE_APP_EMAILJS_TEMPLATE_ID,
+          emailObj,
+          process.env.VUE_APP_EMAILJS_USER_ID,
+        )
+        if (res.status === 200) {
+          router.push({ name: 'Home' })
+        }
+      }
+      catch (err) {
+        console.log('ERROR', err)
+      }
     }
-    return { handleSubmit, name, email, phone, message }
+    return { handleSubmit, contactMessage, isButtonDisabled }
   }
 }
 </script>
@@ -64,7 +117,7 @@ export default {
     margin: auto;
   }
   .contact-header {
-    font-family: themed('cursive-font');
+    font-family: themed("cursive-font");
     font-weight: 400;
     font-size: 24px;
     text-align: center;
@@ -98,7 +151,7 @@ export default {
     margin-top: 35px;
     padding: 15px;
     h4 {
-      font-family: themed('cursive-font');
+      font-family: themed("cursive-font");
       font-weight: 400;
       font-size: $SB_H4_Font_Size;
       margin-top: 10px;
