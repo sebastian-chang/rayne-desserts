@@ -4,14 +4,8 @@
       <h1 class="faq-main-title">Frequently Asked Questions</h1>
       <div class="faq-sections">
         <div v-if="!isLoading">
-          <div
-            class="faq-section"
-            v-for="section in faqData.categories"
-            :key="section.id"
-          >
-            <h2 class="faq-section-title">
-              {{ section.category }}
-            </h2>
+          <div class="faq-section" v-for="section in faqData.categories" :key="section.id">
+            <h2 class="faq-section-title">{{ section.category }}</h2>
             <Accordion :panes="section.questions" />
           </div>
         </div>
@@ -74,6 +68,15 @@ div {
 .faq-sections {
   padding: 2rem;
   box-sizing: border-box;
+  // background-color: #eee;
+  // color: #444;
+  // cursor: pointer;
+  // padding: 18px;
+  // width: 100%;
+  // text-align: left;
+  // border: none;
+  // outline: none;
+  // transition: 0.4s;
 }
 .faq-subsection-title {
   font-weight: 400;
@@ -94,25 +97,25 @@ div {
   font-weight: 700;
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2080%2080'%20focusable='false'%20aria-hidden='true'%20class='ui-icon-controls-close-inverted'%3E%3Cpath%20fill='%2319110b'%20fill-rule='evenodd'%20d='M12%2036h56v8H12z'/%3E%3C/svg%3E");
 }
-.expand_off {
-  display: none !important;
-}
-.expand_on {
-  display: block;
-}
-.faq-section-description {
-  overflow: hidden;
-  height: fit-content;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-.exp_content {
-  display: block;
-  padding: 1.5rem;
-  background-color: #f6f5f3;
-}
+// .expand_off {
+//   display: none !important;
+// }
+// .expand_on {
+//   display: block;
+// }
+// .faq-section-description {
+//   overflow: hidden;
+//   height: fit-content;
+//   padding-top: 24px;
+//   padding-bottom: 24px;
+//   margin-top: 0px;
+//   margin-bottom: 0px;
+// }
+// .exp_content {
+//   display: block;
+//   padding: 1.5rem;
+//   background-color: #f6f5f3;
+// }
 
 button {
   border: 0;

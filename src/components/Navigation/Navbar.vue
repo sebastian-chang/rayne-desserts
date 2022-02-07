@@ -71,7 +71,7 @@ export default {
   background: $light_purple;
   padding: 10px;
   margin: 40px auto;
-  margin-bottom: 60px;
+  // margin-bottom: 60px;
   border-radius: 10px;
   top: 0px;
 }

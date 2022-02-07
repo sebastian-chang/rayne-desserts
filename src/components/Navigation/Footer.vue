@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="footer-main">
-          <div class="footer-item text-area">
+          <div class="footer-item text-area cursor" @click="onUserClick('About')">
             <h3 class="footer-header">Rayne Desserts</h3>
             <p>
               All cakes and desserts are made to order fresh from scratch and

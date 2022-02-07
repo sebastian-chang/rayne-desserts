@@ -1,24 +1,40 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In facere nam nihil ea magnam aut modi eos corrupti veritatis. Quasi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In facere nam nihil ea magnam aut modi eos corrupti veritatis. Quasi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In facere nam nihil ea magnam aut modi eos corrupti veritatis. Quasi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In facere nam nihil ea magnam aut modi eos corrupti veritatis. Quasi.</p>
-
-    <i class="fas fa-hashtag"></i>
+    <Carousel :images="images" />
+    <div class="home_info">
+      <h1>Desserts that you'll love</h1>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { ref } from '@vue/reactivity';
+import Carousel from '../components/Carousel'
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Carousel
   },
+  setup () {
+    const images = ref(['https://picsum.photos/2160?random=1', 'https://picsum.photos/2160?random=6', 'https://picsum.photos/2160?random=13'])
+
+    return { images }
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+  position: relative;
+  max-width: 100%;
+  margin-top: -50px;
+
+  .home_info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: purple;
+  }
+}
+</style>
