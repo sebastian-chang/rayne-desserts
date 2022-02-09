@@ -6,8 +6,8 @@
           <h6 class="product_card_name">{{ item.name }}</h6>
           <span class="product_card_body">{{ item.description }}</span>
         </div>
-        <div class="product_card_media cursor" @click="onUserClick()">
-          <Carousel :images="item.images" />
+        <div class="product_card_media cursor">
+          <Carousel :images="item.images" @clicked="onUserClick"/>
         </div>
       </div>
       <div class="product_favorite">
@@ -89,9 +89,10 @@ export default {
   }
   .product_card_name {
     max-width: 100%;
-    font-size: $SB_H6_Font_Size;
+    color: themed('secondary-color');
+    font-family: themed('cursive-font');
+    font-size: $SB_H3_Font_Size;
     font-weight: 600;
-    text-transform: uppercase;
     margin-top: 0;
     margin-bottom: 16px;
   }

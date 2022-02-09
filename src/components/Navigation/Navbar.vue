@@ -24,8 +24,9 @@
             </ul>
           </span>
           <!-- <router-link :to="{ name: 'Flavors' }">Flavors</router-link> -->
-          <router-link v-if="`${this.$store.state.theme}` === 'dessert'" :to="{ name: 'Weddings' }">Weddings</router-link>
-          <router-link v-if="`${this.$store.state.theme}` === 'wedding'" :to="{ name: 'Desserts' }">Desserts</router-link>
+          <router-link v-if="`${this.$store.state.theme}` === 'desserts'" :to="{ name: 'Weddings' }">Weddings</router-link>
+          <router-link v-if="`${this.$store.state.theme}` === 'weddings'" :to="{ name: 'Cake Tastings' }">Cake Tastings</router-link>
+          <router-link v-if="`${this.$store.state.theme}` === 'weddings'" :to="{ name: 'Desserts' }">Desserts</router-link>
           <!-- <router-link :to="{ name: 'Gallery' }">Gallery</router-link> -->
           <router-link :to="{ name: 'Reviews' }">Reviews</router-link>
           <router-link :to="{ name: 'Contact' }">Contact</router-link>

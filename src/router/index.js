@@ -9,6 +9,7 @@ import Reviews from '../views/Reviews.vue'
 import Contact from '../views/Contact.vue'
 import FAQ from '../views/FAQ.vue'
 import Product from '../views/Product.vue'
+import CakeTastings from '../views/CakeTastings.vue'
 
 const routes = [
   {
@@ -62,6 +63,11 @@ const routes = [
     path: '/faq',
     name: 'FAQ',
     component: FAQ,
+  },
+  {
+    path: '/tastings',
+    name: 'Cake Tastings',
+    component: CakeTastings,
   },
   {
     path: "/about",

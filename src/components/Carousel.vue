@@ -1,24 +1,30 @@
 <template>
-  <div class="product_card_carousel">
-    <button class="mini_slider_button-prev" @click="previous()">
-      <FontAwesomeIcon :icon="left" />
-    </button>
-    <div class="mini_slider_scrollplane">
-      <ul class="mini_slider_items" :style="{'transform': `translateX(${positionX})`}">
-        <li class="mini_slider_item" v-for="(image, index) in localImages" :key="index">
-          <div class="smart_picture">
-            <picture>
-              <img :src="image" class="smart_picture_object" />
-            </picture>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <button class="mini_slider_button-next" @click="next()">
-      <FontAwesomeIcon :icon="right" />
-    </button>
-    <div class="mini_slider_tracker">
-      <div class="mini_slider_knob"></div>
+  <div :class="`rayne-${this.$store.state.theme}`" v-if="hasLoaded">
+    <div class="product_card_carousel">
+      <button class="mini_slider_button-prev cursor" @click="previous()">
+        <FontAwesomeIcon :icon="left" />
+      </button>
+      <div class="mini_slider_scrollplane" @click="onUserClick()">
+        <ul
+          class="mini_slider_items"
+          :style="{'transform': `translateX(${positionX})`}"
+          :class="restart ? 'goback' : ''"
+        >
+          <li class="mini_slider_item" v-for="(image, index) in ogImages" :key="index">
+            <div class="smart_picture">
+              <picture>
+                <img :src="image" class="smart_picture_object" />
+              </picture>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button class="mini_slider_button-next cursor" @click.prevent="next()">
+        <FontAwesomeIcon :icon="right" />
+      </button>
+      <div class="mini_slider_tracker">
+        <div class="mini_slider_knob"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,29 +33,59 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { ref } from '@vue/reactivity'
+import { onMounted } from '@vue/runtime-core'
 export default {
   props: ['images'],
   components: { FontAwesomeIcon },
-  setup (props) {
-    const localImages = ref(props.images)
-    const positionX = ref('0%')
-    const activeIndex = ref(0)
+  setup (props, context) {
+    const positionX = ref('-100%')
+    const activeIndex = ref(1)
+    const ogImages = [...props.images]
+    const ogLength = ogImages.length
+    const restart = ref(false)
+    const hasLoaded = ref(false)
+    const first = ogImages[0]
+    const last = ogImages[ogLength - 1]
+
+    onMounted(() => {
+      ogImages.unshift(last)
+      ogImages.push(first)
+      hasLoaded.value = true
+    })
 
     const nextImage = () => {
       activeIndex.value++
-      if (activeIndex.value >= localImages.value.length) {
-        activeIndex.value = 0
+      positionX.value = (activeIndex.value * - 100).toString() + '%'
+      if (activeIndex.value > ogLength) {
+        setTimeout(() => {
+          restart.value = true
+          activeIndex.value = 1;
+          positionX.value = (activeIndex.value * - 100).toString() + '%'
+        }, 200)
+        setTimeout(() => {
+          restart.value = false
+        }, 220)
+
       }
-      positionX.value = (activeIndex.value * -100).toString() + '%'
     }
     const previousImage = () => {
       activeIndex.value--
-      if (activeIndex.value < 0) {
-        activeIndex.value = localImages.value.length - 1
+      positionX.value = (activeIndex.value * - 100).toString() + '%'
+      if (activeIndex.value <= 0) {
+        setTimeout(() => {
+          restart.value = true
+          activeIndex.value = ogImages.length - 2
+          positionX.value = (activeIndex.value * - 100).toString() + '%'
+        }, 200)
+        setTimeout(() => {
+          restart.value = false
+        }, 220);
       }
-      positionX.value = (activeIndex.value * -100).toString() + '%'
     }
-    return { left: faChevronLeft, right: faChevronRight, localImages, next: nextImage, previous: previousImage, positionX }
+    const onUserClick = () => {
+      context.emit('clicked')
+    }
+    return { left: faChevronLeft, right: faChevronRight, next: nextImage, previous: previousImage, positionX, onUserClick, ogImages, restart, hasLoaded }
   }
 
 }
@@ -64,10 +100,9 @@ export default {
   }
   .mini_slider_items {
     white-space: nowrap;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
     list-style-type: none;
     padding: 0;
-    animation: infinite;
   }
   .mini_slider_item {
     display: inline-flex;
@@ -93,7 +128,8 @@ export default {
     height: 3rem;
     background: #fff;
     border: none;
-    cursor: pointer;
+    border-radius: themed('border-radius');
+    color: themed('secondary-color');
     transition: opacity 0.3s ease-in-out;
   }
   .mini_slider_button-next {
@@ -107,6 +143,10 @@ export default {
     display: block;
     width: 100%;
     object-fit: cover;
+  }
+
+  .goback {
+    transition: none;
   }
 }
 </style>

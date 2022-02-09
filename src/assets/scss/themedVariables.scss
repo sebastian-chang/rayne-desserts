@@ -1,7 +1,7 @@
 @import "./data.scss";
 
 $themes: (
-  wedding: (
+  weddings: (
     main-color: $color-white,
     serif-font: $SB_Main-Wedding,
     secondary-color: $color-black-100,
@@ -14,7 +14,7 @@ $themes: (
     box-shadow: rgba(0, 0, 0, 0.2),
     box-shadow-hover: rgba(0, 0, 0, 0.2),
   ),
-  dessert: (
+  desserts: (
     main-color: $color-purple-light,
     serif-font: $SB_Main-Dessert,
     secondary-color: $color-purple-dark,

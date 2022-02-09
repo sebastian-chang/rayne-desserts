@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    theme: 'dessert'
+    theme: 'desserts'
   },
   mutations: {
     THEME_CHANGE (state, theme) {
@@ -15,4 +15,9 @@ export default createStore({
     }
   },
   modules: {},
+  getters: {
+    theme (state) {
+      return state.theme
+    }
+  }
 });
