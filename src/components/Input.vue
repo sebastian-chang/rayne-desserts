@@ -1,18 +1,19 @@
 <template>
-  <!-- Normal text input -->
-  <div class="group">
-    <input
-      v-if="type === 'text'"
-      type="text"
-      id="{name}"
-      class="form_field"
-      :placeholder="inputPlaceholder"
-      v-model="inputText"
-      autocomplete="off"
-      required
-    />
-    <!-- Password input -->
-    <!-- <div class="group" v-if="type === 'password'">
+  <div :class="`rayne-${this.$store.state.theme}`">
+    <!-- Normal text input -->
+    <div class="group">
+      <input
+        v-if="type === 'text'"
+        type="text"
+        id="{name}"
+        class="form_field"
+        :placeholder="inputPlaceholder"
+        v-model="inputText"
+        autocomplete="off"
+        required
+      />
+      <!-- Password input -->
+      <!-- <div class="group" v-if="type === 'password'">
     <input
       type="password"
       id="{name}"
@@ -20,44 +21,45 @@
       v-model="inputText"
       autocomplete="off"
       required="{required}"
-    /> -->
-    <!-- Email input -->
-    <input
-      v-if="type === 'email'"
-      type="email"
-      id="{name}"
-      class="form_field"
-      :placeholder="inputPlaceholder"
-      v-model="inputText"
-      autocomplete="off"
-      required
-    />
-    <!-- Phone input -->
-    <input
-      v-if="type === 'phone'"
-      type="text"
-      id="{name}"
-      class="form_field"
-      :placeholder="inputPlaceholder"
-      v-model="inputText"
-      autocomplete="off"
-      @keypress="phoneValidation($event)"
-      @input="phoneMask()"
-      required
-    />
-    <!-- Textarea input -->
-    <textarea
-      v-if="type === 'textarea'"
-      class="form_field form_textarea"
-      name="{name}"
-      cols="30"
-      rows="10"
-      v-model="inputText"
-      required
-    ></textarea>
-    <span class="highlight"></span>
-    <span class="bar"></span>
-    <label>{{ inputLabel }}</label>
+      />-->
+      <!-- Email input -->
+      <input
+        v-if="type === 'email'"
+        type="email"
+        id="{name}"
+        class="form_field"
+        :placeholder="inputPlaceholder"
+        v-model="inputText"
+        autocomplete="off"
+        required
+      />
+      <!-- Phone input -->
+      <input
+        v-if="type === 'phone'"
+        type="text"
+        id="{name}"
+        class="form_field"
+        :placeholder="inputPlaceholder"
+        v-model="inputText"
+        autocomplete="off"
+        @keypress="phoneValidation($event)"
+        @input="phoneMask()"
+        required
+      />
+      <!-- Textarea input -->
+      <textarea
+        v-if="type === 'textarea'"
+        class="form_field form_textarea"
+        name="{name}"
+        cols="30"
+        rows="10"
+        v-model="inputText"
+        required
+      ></textarea>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>{{ inputLabel }}</label>
+    </div>
   </div>
 </template>
 
@@ -127,101 +129,93 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$trans-time: 300ms;
-.group {
-  position: relative;
-  padding: 15px 0 0;
-  margin-top: 10px;
-}
-
-// INPUTS // ============================== //
-.form_field {
-  font-family: inherit;
-  width: 100%;
-  border: 0;
-  // border-bottom: 2px solid #9b9b9b;
-  outline: 0;
-  font-size: 1.3rem;
-  color: $dark-purple;
-  padding: 7px 0;
-  // background: transparent;
-  // transition: border-bottom 0.2s ease-out;
-
-  background: transparent;
-  // color: $muted-color;
-  // font-size: 18px;
-  // padding: 10px 10px 10px 5px;
-  display: block;
-  // width: $width;
-  // border: none;
-  // border-radius: 0;
-  border-bottom: 1px solid $light-purple;
-  &:focus {
-    outline: none;
+@include rayne($themes) {
+  .group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
   }
-  &:focus ~ label,
-  &:valid ~ label {
-    top: -14px;
+
+  // INPUTS // ============================== //
+  .form_field {
     font-family: inherit;
-    font-size: 1rem;
-    font-weight: 700;
-    color: $dark-purple;
-  }
-  &:focus ~ .bar:before {
     width: 100%;
+    border: 0;
+    outline: 0;
+    font-size: 1.3rem;
+    color: themed('secondary-color'); //dark purple
+    padding: 7px 0;
+    background: transparent;
+    display: block;
+    border-bottom: 1px solid themed('main-color'); //light purple
+
+    &:focus {
+      outline: none;
+    }
+    &:focus ~ label,
+    &:valid ~ label {
+      top: -14px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      color: themed('secondary-color'); //dark-purple
+    }
+    &:focus ~ .bar:before {
+      width: 100%;
+    }
   }
-}
-.form_textarea {
-  resize: none;
-  max-width: 100%;
-  min-width: 100%;
-}
-// Placeholder text
-.form_field::-webkit-input-placeholder {
-  opacity: 0;
-  transition: opacity 0.2s ease-out;
-}
-.form_field:focus::-webkit-input-placeholder {
-  opacity: 1;
-  transition-delay: 0.2s;
-}
-.form_field::-moz-placeholder {
-  opacity: 0;
-  transition: opacity 0.2s ease-out;
-}
-.form_field:focus::-moz-placeholder {
-  opacity: 1;
-  transition-delay: 0.2s;
-}
+  .form_textarea {
+    resize: none;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  // Placeholder text
+  .form_field::-webkit-input-placeholder {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+  }
+  .form_field:focus::-webkit-input-placeholder {
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
+  .form_field::-moz-placeholder {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+  }
+  .form_field:focus::-moz-placeholder {
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
 
-.form_field[type="password"] {
-  letter-spacing: 0.3em;
-}
+  .form_field[type="password"] {
+    letter-spacing: 0.3em;
+  }
 
-label {
-  color: $light-purple;
-  font-size: 1.2rem;
-  font-weight: normal;
-  position: absolute;
-  pointer-events: none;
-  left: 5px;
-  top: 15px;
-  transition: $trans-time ease all;
-}
-
-.bar {
-  position: relative;
-  display: block;
-  width: 100%;
-  &:before {
-    content: "";
-    height: 2px;
-    width: 0;
-    bottom: 0px;
+  label {
+    color: themed('main-color'); //light purple
+    font-size: 1.2rem;
+    font-weight: normal;
     position: absolute;
-    background: $dark-purple;
-    transition: $trans-time ease all;
-    left: 0%;
+    pointer-events: none;
+    left: 5px;
+    top: 15px;
+    transition: 0.3s ease all;
+  }
+
+  .bar {
+    position: relative;
+    display: block;
+    width: 100%;
+    &:before {
+      content: "";
+      height: 2px;
+      width: 0;
+      bottom: 0px;
+      position: absolute;
+      background: themed('secondary-color'); //dark-purple
+      transition: 0.3s ease all;
+      left: 0%;
+    }
   }
 }
 </style>

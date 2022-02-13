@@ -1,13 +1,15 @@
 <template>
-  <div class="contact-card">
-    <div v-if="card.label !== ''" @click="onUserClick(card.label)" class="cursor">
-      <div class="contact-icon">
-        <FontAwesomeIcon :icon="card.icon" />
+  <div :class="`rayne-${this.$store.state.theme}`">
+    <div class="contact-card">
+      <div v-if="card.label !== ''" @click="onUserClick(card.label)" class="cursor">
+        <div class="contact-icon">
+          <FontAwesomeIcon :icon="card.icon" />
+        </div>
+        <h5 class="contact-label">{{ card.label }}</h5>
+        <p class="contact-text">{{ card.text }}</p>
       </div>
-      <h5 class="contact-label">{{ card.label }}</h5>
-      <p class="contact-text">{{ card.text }}</p>
+      <div v-else>...Loading</div>
     </div>
-    <div v-else>...Loading</div>
   </div>
 </template>
 
@@ -52,7 +54,7 @@ export default {
     })
 
     const onUserClick = (linkTo) => {
-      router.push({name: linkTo})
+      router.push({ name: linkTo })
     }
     return { card, onUserClick }
   }
@@ -60,46 +62,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.contact-card {
-  border: 1px solid $light-purple;
-  border-radius: 5px;
-  padding: 25px;
-  margin: 15px;
-  max-width: 275px;
-  text-align: left;
-  transition: all 0.3s linear;
-  overflow-wrap: break-word;
-}
-.contact-icon {
-  display: inline-block;
-  background: $light-purple;
-  color: white;
-  font-size: 20px;
-  text-align: center;
-  height: 50px;
-  width: 50px;
-  line-height: 50px;
-  position: relative;
-  border-radius: 5px;
-  transition: all 0.3s linear;
-}
-.contact-card:hover {
-  border: 1px solid $dark-purple;
-}
-.contact-card:hover .contact-icon {
-  background: $dark-purple;
-}
-.contact-label {
-  letter-spacing: 0;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-family: "Marck Script", cursive;
-  font-weight: 400;
-  font-size: 20px;
-  transition: all 0.3s linear;
-}
-.contact-text {
-  letter-spacing: 0.5px;
-  transition: all 0.3s linear;
+@include rayne($themes) {
+  .contact-card {
+    border: 1px solid themed('main-color');
+    border-radius: 5px;
+    padding: 25px;
+    margin: 15px;
+    max-width: 275px;
+    text-align: left;
+    // font-family: themed('serif-font');
+    transition: all 0.3s linear;
+    overflow-wrap: break-word;
+  }
+  .contact-icon {
+    display: inline-block;
+    background: themed('main-color');
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.3s linear;
+  }
+  .contact-card:hover {
+    border: 1px solid $dark-purple;
+  }
+  .contact-card:hover .contact-icon {
+    background: $dark-purple;
+  }
+  .contact-label {
+    letter-spacing: 0;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-family: themed('cursive-font');
+    font-weight: 400;
+    font-size: 20px;
+    transition: all 0.3s linear;
+  }
+  .contact-text {
+    letter-spacing: 0.5px;
+    transition: all 0.3s linear;
+  }
 }
 </style>

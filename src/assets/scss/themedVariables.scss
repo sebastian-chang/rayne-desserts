@@ -2,9 +2,10 @@
 
 $themes: (
   weddings: (
-    main-color: $color-white,
-    serif-font: $SB_Main-Wedding,
+    main-color: $color-white-100,
     secondary-color: $color-black-100,
+    icon-color: $color-white-off,
+    serif-font: $SB_Main-Wedding,
     cursive-font: $SB_Secondary-Wedding,
     border-radius: 0px,
     border: $color-white-off 2px solid,
@@ -16,12 +17,13 @@ $themes: (
   ),
   desserts: (
     main-color: $color-purple-light,
-    serif-font: $SB_Main-Dessert,
     secondary-color: $color-purple-dark,
+    icon-color: $color-white-100,
+    serif-font: $SB_Main-Dessert,
     cursive-font: $SB_Secondary-Dessert,
     border-radius: 10px,
     border: $color-purple-dark 2px dashed,
-    nav-color: $color-white,
+    nav-color: $color-white-100,
     nav-color-highlight: $color-purple-dark,
     heart-color: $color-purple-light,
     box-shadow: rgba(200, 175, 211, 0.2),

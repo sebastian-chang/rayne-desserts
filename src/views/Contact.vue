@@ -115,8 +115,6 @@ export default {
     }
 
     #contact-submit-button {
-      padding: 10px 20px;
-      width: 240px;
       grid-column: 2/3;
     }
   }

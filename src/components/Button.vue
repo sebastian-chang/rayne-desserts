@@ -1,5 +1,7 @@
 <template>
+  <div :class="`rayne-${this.$store.state.theme}`">
   <button class="my-button" :style="cssVars()">{{ label }}</button>
+  </div>
 </template>
 
 <script>
@@ -9,8 +11,8 @@ export default {
     const cssVars = () => {
       return {
         '--button-bg-color': props.color !== '' ? props.color : '#CCC',
-        '--button-fg-color': props.color !== ''? 'white' : 'black'
-         }
+        '--button-fg-color': props.color !== '' ? 'white' : 'black'
+      }
     }
     return { cssVars }
   }
@@ -18,11 +20,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.my-button {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 0;
-  background-color: var(--button-bg-color);
-  color: var(--button-fg-color);
+@include rayne($themes) {
+  .my-button {
+    padding: 10px 20px;
+    border-radius: themed('border-radius');
+    border: 0;
+    padding: 10px 20px;
+    width: 240px;
+    background-color: var(--button-bg-color);
+    color: var(--button-fg-color);
+  }
 }
 </style>
