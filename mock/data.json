@@ -2,6 +2,58 @@
   "flavors": [
     {
       "id": 1,
+      "type": "cake",
+      "name": "Chocolate Chip"
+    },
+    {
+      "id": 2,
+      "type": "cake",
+      "name": "Apple"
+    },
+    {
+      "id": 3,
+      "type": "cake",
+      "name": "Key Lime"
+    },
+    {
+      "id": 4,
+      "type": "filling",
+      "name": "Pecan"
+    },
+    {
+      "id": 5,
+      "type": "filling",
+      "name": "Peanut Butter"
+    },
+    {
+      "id": 6,
+      "type": "icing",
+      "name": "Oatmeal Raisin"
+    },
+    {
+      "id": 7,
+      "type": "icing",
+      "name": "Vanilla"
+    },
+    {
+      "id": 8,
+      "type": "icing",
+      "name": "Champenge"
+    },
+    {
+      "id": 9,
+      "type": "filling",
+      "name": "Blackberry"
+    },
+    {
+      "id": 10,
+      "type": "cake",
+      "name": "Carrot"
+    }
+  ],
+  "flavorsTemp": [
+    {
+      "id": 1,
       "type": "cookies",
       "name": "Chocolate Chip",
       "img": "https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1.jpg"

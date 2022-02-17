@@ -12,6 +12,19 @@
         autocomplete="off"
         required
       />
+      <!-- Number input -->
+      <input
+        v-if="type === 'number'"
+        type="number"
+        id="{name}"
+        class="form_field"
+        :placeholder="inputPlaceholder"
+        v-model="inputText"
+        autocomplete="off"
+        min="0"
+        @keyup="numberValidation($event)"
+        required
+      />
       <!-- Password input -->
       <!-- <div class="group" v-if="type === 'password'">
     <input
@@ -42,7 +55,7 @@
         :placeholder="inputPlaceholder"
         v-model="inputText"
         autocomplete="off"
-        @keypress="phoneValidation($event)"
+        @keyup="numberValidation($event)"
         @input="phoneMask()"
         required
       />
@@ -83,6 +96,11 @@ export default {
       inputPlaceholder.value = temp
       inputLabel.value = temp
     }
+    if (props.type === 'number') {
+      const temp = toRef(props.name)._object
+      inputPlaceholder.value = '100'
+      inputLabel.value = temp
+    }
     else if (props.type === 'phone') {
       inputPlaceholder.value = '(123) 456-7890'
       inputLabel.value = 'Phone'
@@ -95,7 +113,7 @@ export default {
       inputLabel.value = 'Message'
     }
 
-    const phoneValidation = event => {
+    const numberValidation = event => {
       if (phoneRegex.test(event.key)) {
         return true
       }
@@ -122,7 +140,7 @@ export default {
       inputText.value = maskPhoneText
     }
 
-    return { inputText, inputLabel, inputPlaceholder, phoneValidation, phoneMask }
+    return { inputText, inputLabel, inputPlaceholder, phoneMask, numberValidation }
   }
 
 }
@@ -143,11 +161,11 @@ export default {
     border: 0;
     outline: 0;
     font-size: 1.3rem;
-    color: themed('secondary-color'); //dark purple
+    color: $dark_purple; //dark purple
     padding: 7px 0;
     background: transparent;
     display: block;
-    border-bottom: 1px solid themed('main-color'); //light purple
+    border-bottom: 1px solid $light_purple; //light purple
 
     &:focus {
       outline: none;
@@ -158,7 +176,7 @@ export default {
       font-family: inherit;
       font-size: 1rem;
       font-weight: 700;
-      color: themed('secondary-color'); //dark-purple
+      color: $dark_purple; //dark-purple
     }
     &:focus ~ .bar:before {
       width: 100%;
@@ -192,7 +210,7 @@ export default {
   }
 
   label {
-    color: themed('main-color'); //light purple
+    color: $light_purple; //light purple
     font-size: 1.2rem;
     font-weight: normal;
     position: absolute;
@@ -212,7 +230,7 @@ export default {
       width: 0;
       bottom: 0px;
       position: absolute;
-      background: themed('secondary-color'); //dark-purple
+      background: $dark_purple; //dark-purple
       transition: 0.3s ease all;
       left: 0%;
     }
