@@ -1,6 +1,6 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`">
-  <button class="my-button" :style="cssVars()">{{ label }}</button>
+  <button class="my-button" :class="disabled ? '' : 'cursor'" :disabled="disabled" :style="cssVars()">{{ label }}</button>
   </div>
 </template>
 

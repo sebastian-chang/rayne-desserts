@@ -21,31 +21,43 @@
           <form @submit.prevent="handleSubmit()" class="contact-form">
             <Input
               class="contact-form-input"
-              :name="'Name'"
+              label="Name"
+              name="name"
               :type="'text'"
               :required="true"
               v-model="contactMessage.name"
             />
             <Input
               class="contact-form-input"
+              label="Phone"
+              name="phone"
               :type="'phone'"
               :required="false"
               v-model="contactMessage.phone"
             />
             <Input
               class="contact-form-input"
+              label="Email"
+              name="email"
               :type="'email'"
               :required="true"
               v-model="contactMessage.email"
             />
-            <Input id="contact-form-message" :type="'textarea'" v-model="contactMessage.message" />
+            <Input
+              id="contact-form-message"
+              label="Message"
+              name="message"
+              :type="'textarea'"
+              :required="true"
+              v-model="contactMessage.message"
+            />
 
             <Button
               id="contact-submit-button"
               :label="'Send'"
               :color="'#c8afd3'"
               :size="'md'"
-              :disabled="isButtonDisabled"
+              :disabled=" isButtonDisabled || isSubmitting"
             />
           </form>
         </div>
@@ -55,7 +67,7 @@
 </template>
 
 <script>
-import { reactive, } from 'vue'
+import { reactive, ref, } from 'vue'
 import { useRouter } from 'vue-router'
 import ContactCard from '../components/ContactCard.vue'
 import Button from '../components/Button.vue'
@@ -82,8 +94,10 @@ export default {
 
     const { errors } = useFormValidation();
     const { isButtonDisabled } = useSubmitButtonState(contactMessage, errors);
+    const isSubmitting = ref(false)
 
     const handleSubmit = async () => {
+      isSubmitting.value = true
       const emailObj = {
         userName: contactMessage.name,
         email: contactMessage.email,
@@ -91,9 +105,10 @@ export default {
         message: contactMessage.message,
       }
       try {
+        console.log('!!EMAIL OBJECT', emailObj)
         const res = await emailjs.send(
           process.env.VUE_APP_EMAILJS_SERVICE_ID,
-          process.env.VUE_APP_EMAILJS_TEMPLATE_ID,
+          process.env.VUE_APP_EMAILJS_CONTACT_TEMPLATE_ID,
           emailObj,
           process.env.VUE_APP_EMAILJS_USER_ID,
         )
@@ -103,9 +118,10 @@ export default {
       }
       catch (err) {
         console.log('ERROR', err)
+        isSubmitting.value = false
       }
     }
-    return { handleSubmit, contactMessage, isButtonDisabled }
+    return { handleSubmit, contactMessage, isButtonDisabled, isSubmitting }
   }
 }
 </script>
@@ -169,6 +185,7 @@ export default {
 
     #contact-submit-button {
       grid-column: 2/3;
+      margin-top: 30px;
     }
   }
   @media only screen and (max-width: 576px) {

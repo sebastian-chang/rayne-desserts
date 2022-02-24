@@ -1,22 +1,42 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`">
     <div class="switch_group">
-      <input type="checkbox" :id="name" class="switch cursor" v-model="inputValue" />
-      <label class="cursor" :for="name">{{name}}</label>
+      <input
+        type="checkbox"
+        :id="name"
+        @change="validateInput()"
+        class="switch cursor"
+        v-model="inputValue"
+        :required="required"
+      />
+      <label class="cursor" :for="name">{{label}}</label>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { computed } from '@vue/reactivity'
+import userFormValidation from '../modules/userFormValidation'
+import { onMounted } from '@vue/runtime-core'
 export default {
-  props: ['name'],
-  setup () {
-    const inputValue = ref(false)
+  props: ['name', 'modelValue', 'required', 'label'],
+  setup (props, { emit }) {
+    const inputValue = computed(({
+      get: () => props.modelValue,
+      set: value => emit('update:modelValue', value)
+    }))
 
-    return { inputValue }
+    const { validateToggleSwitch } = userFormValidation()
+    const validateInput = () => {
+      validateToggleSwitch(props.name, inputValue.value, props.required)
+    }
+
+    onMounted(() => {
+      validateInput()
+    })
+
+    return { inputValue, validateInput }
   }
-
 }
 </script>
 

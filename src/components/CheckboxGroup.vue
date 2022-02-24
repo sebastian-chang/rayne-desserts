@@ -1,6 +1,6 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`">
-    <p class="checkbox_group_header">{{name}}</p>
+    <p class="checkbox_group_header">{{label}}</p>
     <div class="checkbox_group">
       <li v-for="item in items" :key="item.id">
         <input
@@ -9,22 +9,41 @@
           :value="item.name"
           v-model="userItems"
           :disabled="userItems.length >= maxPicks && userItems.indexOf(item.name) === -1"
+          @change="validateInput()"
           class="checkbox cursor"
+          :required="required && !userItems.length"
         />
         <label class="cursor" :for="`${name}-${item.id}`">{{item.name}}</label>
       </li>
     </div>
+    <div class="ui basic label pointing red" v-if="errors[name]">{{ errors[name] }}</div>
   </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { computed } from '@vue/reactivity'
+import userFormValidation from '../modules/userFormValidation'
+import { onMounted } from '@vue/runtime-core'
 export default {
-  props: ['items', 'maxPicks', 'name'],
-  setup () {
-    const userItems = ref([])
+  props: ['items', 'maxPicks', 'name', 'modelValue', 'required', 'label'],
+  setup (props, { emit }) {
+    const userItems = computed(({
+      get: () => props.modelValue,
+      set: value => emit('update:modelValue', value)
+    }))
 
-    return { userItems }
+    const { errors, validateCheckboxGroup } = userFormValidation()
+    const validateInput = () => {
+      validateCheckboxGroup(props.name, userItems.value, props.required)
+    }
+
+    onMounted(()=>{
+      if(props.required){
+        validateInput()
+      }
+    })
+
+    return { userItems, errors, validateInput }
   }
 }
 </script>
@@ -32,9 +51,9 @@ export default {
 <style lang="scss" scoped>
 @include rayne($themes) {
   @supports (-webkit-appearance: none) or (-moz-appearance: none) {
-    .checkbox_group_header{
+    .checkbox_group_header {
       color: $dark_purple;
-      font-family: themed('serif-font');
+      font-family: themed("serif-font");
       font-size: 18px;
       font-weight: 700;
       // border-bottom: 1px solid $dark_purple;

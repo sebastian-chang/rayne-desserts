@@ -76,37 +76,95 @@
         <h1 class="tasting_title">Request a cake tasting</h1>
         <p>Please fill out the following form to schedule a cake tasting</p>
         <form class="tasting_form" @submit.prevent="onHandleSubmit">
-          <Input class="tasting_form_input" :name="'Your Name'" :type="'text'" :required="true" />
-          <Input class="contact-form-input" :type="'email'" :required="true" />
           <Input
             class="tasting_form_input"
-            :name="'Name of Venue'"
+            label="Name"
+            name="name"
+            v-model="tastingMessage.name"
+            :type="'text'"
+            :required="true"
+          />
+          <Input
+            class="contact-form-input"
+            label="Email"
+            name="email"
+            v-model="tastingMessage.email"
+            :type="'email'"
+            :required="true"
+          />
+          <Input
+            class="tasting_form_input"
+            label="Name of Venue"
+            name="venue"
+            v-model="tastingMessage.venue"
             :type="'text'"
             :required="true"
           />
           <Input
             class="tasting_form_input"
-            :name="'Number of Guests'"
+            label="Number of Guests"
+            name="guests"
+            v-model="tastingMessage.guests"
             :type="'number'"
             :required="true"
           />
           <Datepicker
             class="tasting_form_date tasting_form_input"
-            v-model="date"
+            v-model="tastingMessage.date"
             :clearButton="true"
             inputFormat="MMM dd, yyyy"
+            :weekStartsOn="0"
             :style="dateStyles"
             placeholder="Type or select date"
           />
           <div></div>
-          <CheckboxGroup :items="cakes" :maxPicks="3" name="Cake Flavors" />
-          <CheckboxGroup :items="icings" :maxPicks="2" name="Icings" />
-          <CheckboxGroup :items="fillings" :maxPicks="2" name="Cake Fillings" />
-          <CheckboxGroup :items="otherItems" name="Misc" />
-          <Switch class="tasting_delivery tasting_form_input" name="Cake Delivery" />
-          <div></div>
-          <div></div>
-          <Button id="tasting_submit_button" :label="'Send'" :color="'#c8afd3'" :size="'md'" />
+          <CheckboxGroup
+            class="tasting_form_input"
+            label="Cake Flavors"
+            name="flavors"
+            v-model="tastingMessage.flavors"
+            :items="cakes"
+            :maxPicks="3"
+            :required="true"
+          />
+          <CheckboxGroup
+            class="tasting_form_input"
+            label="Icings"
+            name="icings"
+            v-model="tastingMessage.icings"
+            :items="icings"
+            :maxPicks="2"
+            :required="true"
+          />
+          <CheckboxGroup
+            class="tasting_form_input"
+            label="Cake Fillings"
+            name="fillings"
+            v-model="tastingMessage.fillings"
+            :items="fillings"
+            :maxPicks="2"
+            :required="true"
+          />
+          <CheckboxGroup
+            v-model="tastingMessage.misc"
+            :items="otherItems"
+            label="Misc Items"
+            name="misc"
+          />
+          <Switch
+            label="Cake Delivery"
+            name="delivery"
+            v-model="tastingMessage.delivery"
+            class="tasting_delivery tasting_form_input"
+            :required="false"
+          />
+          <Button
+            id="tasting_submit_button"
+            :label="'Send'"
+            :color="'#c8afd3'"
+            :size="'md'"
+            :disabled="isButtonDisabled || isSubmitting"
+          />
         </form>
       </div>
     </div>
@@ -114,13 +172,19 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { reactive, ref } from '@vue/reactivity'
+import { onMounted } from '@vue/runtime-core'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import Datepicker from 'vue3-datepicker'
 import Input from '../components/Input.vue'
 import Button from '../components/Button.vue'
 import CheckboxGroup from '../components/CheckboxGroup.vue'
 import Switch from '../components/Switch.vue'
-import { onMounted } from '@vue/runtime-core'
+import useFormValidation from '../modules/userFormValidation.js'
+import useSubmitButtonState from '../modules/useSubmitButtonState.js'
+import emailjs from '@emailjs/browser'
+
 export default {
   components: {
     Input,
@@ -154,29 +218,96 @@ export default {
         "id": 2,
         "name": "Cake Topper",
       }]
+    const tastingMessage = reactive({
+      name: "",
+      email: "",
+      venue: "",
+      guests: "",
+      date: new Date(),
+      flavors: [],
+      icings: [],
+      fillings: [],
+      misc: [],
+      delivery: false,
+    })
+
+    const store = useStore()
+    const router = useRouter()
     const date = ref(new Date())
     const cakes = ref([])
     const icings = ref([])
     const fillings = ref([])
     const userFlavors = ref([])
+    const isSubmitting = ref(false)
+    const { errors } = useFormValidation()
+    const { isButtonDisabled } = useSubmitButtonState(tastingMessage, errors)
+
 
     onMounted(async () => {
+      store.dispatch('themeChange', 'weddings')
       const res = await fetch(`${process.env.VUE_APP_BASE_API}/flavors`)
       const data = await res.json()
       cakes.value = data.filter(item => item.type === 'cake')
       icings.value = data.filter(item => item.type === 'icing')
       fillings.value = data.filter(item => item.type === 'filling')
-      // flavors.value = await data
-      // const temp = await data
-      // flavors.value = temp.filter(item => item.type === 'cake')
     })
 
 
-    const onHandleSubmit = () => {
-      console.log("SUBMITTED")
+    const onHandleSubmit = async () => {
+      isSubmitting.value = true
+      const [day, month, date, year] = [
+        new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(tastingMessage.date) + ',',
+        new Intl.DateTimeFormat('en-US', { month: 'long' }).format(tastingMessage.date),
+        tastingMessage.date.getDate() + ',',
+        tastingMessage.date.getFullYear()
+      ]
+      const delivery = tastingMessage.delivery ? 'need' : 'not need'
+      const misc = tastingMessage.misc.length === 0 ? 'nothing' : 'a ' + tastingMessage.misc.join(', ')
+      const tastingObj = {
+        userName: tastingMessage.name,
+        email: tastingMessage.email,
+        venue: tastingMessage.venue,
+        guests: tastingMessage.guests,
+        weddingDate: [day, month, date, year].join(' '),
+        flavors: tastingMessage.flavors.join(', '),
+        icings: tastingMessage.icings.join(', '),
+        fillings: tastingMessage.fillings.join(', '),
+        misc: misc,
+        delivery: delivery,
+      }
+
+      try {
+        console.log('!!TASTING OBJECT', tastingObj)
+        const res = await emailjs.send(
+          process.env.VUE_APP_EMAILJS_SERVICE_ID,
+          process.env.VUE_APP_EMAILJS_TASTING_TEMPLATE_ID,
+          tastingObj,
+          process.env.VUE_APP_EMAILJS_USER_ID,
+        )
+        if (res.status === 200) {
+          router.push({ name: 'Home' })
+        }
+      }
+      catch (err) {
+        console.log('TASTING ERROR', err)
+        isSubmitting.value = false
+      }
+      console.log("SUBMITTED", tastingObj)
     }
 
-    return { onHandleSubmit, date, dateStyles, cakes, icings, fillings, userFlavors, otherItems }
+    return {
+      onHandleSubmit,
+      date,
+      dateStyles,
+      cakes,
+      icings,
+      fillings,
+      userFlavors,
+      otherItems,
+      tastingMessage,
+      isSubmitting,
+      isButtonDisabled
+    }
   },
 }
 </script>
@@ -216,12 +347,12 @@ export default {
   .tasting_form {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
+    gap: 50px;
   }
-  .tasting_submit_button {
+  #tasting_submit_button {
     grid-column: 2/3;
     margin-top: 40px;
-    padding-top: 40px;
+    // padding-top: 40px;
   }
   .tasting_title {
     font-family: themed("cursive-font");

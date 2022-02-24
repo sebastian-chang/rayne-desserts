@@ -2,28 +2,20 @@
   <div :class="`rayne-${this.$store.state.theme}`">
     <!-- Normal text input -->
     <div class="group">
-      <input
-        v-if="type === 'text'"
-        type="text"
-        id="{name}"
-        class="form_field"
-        :placeholder="inputPlaceholder"
+      <Text
+        v-if="type==='text'"
+        :name="name"
+        :label="label"
         v-model="inputText"
-        autocomplete="off"
-        required
+        :required="required"
       />
       <!-- Number input -->
-      <input
+      <Number
         v-if="type === 'number'"
-        type="number"
-        id="{name}"
-        class="form_field"
-        :placeholder="inputPlaceholder"
+        :name="name"
+        :label="label"
         v-model="inputText"
-        autocomplete="off"
-        min="0"
-        @keyup="numberValidation($event)"
-        required
+        :required="required"
       />
       <!-- Password input -->
       <!-- <div class="group" v-if="type === 'password'">
@@ -36,128 +28,57 @@
       required="{required}"
       />-->
       <!-- Email input -->
-      <input
+      <Email
         v-if="type === 'email'"
-        type="email"
-        id="{name}"
-        class="form_field"
-        :placeholder="inputPlaceholder"
+        :name="name"
+        :label="label"
         v-model="inputText"
-        autocomplete="off"
-        required
+        :required="required"
       />
       <!-- Phone input -->
-      <input
-        v-if="type === 'phone'"
-        type="text"
-        id="{name}"
-        class="form_field"
-        :placeholder="inputPlaceholder"
+      <Phone
+        v-if="type ==='phone'"
+        :name="name"
+        :label="label"
         v-model="inputText"
-        autocomplete="off"
-        @keyup="numberValidation($event)"
-        @input="phoneMask()"
-        required
+        :required="required"
       />
       <!-- Textarea input -->
-      <textarea
-        v-if="type === 'textarea'"
-        class="form_field form_textarea"
-        name="{name}"
-        cols="30"
-        rows="10"
+      <Message
+        v-if="type ==='textarea'"
+        :name="name"
+        :label="label"
         v-model="inputText"
-        required
-      ></textarea>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>{{ inputLabel }}</label>
+        :required="required"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { computed, ref, toRef, } from '@vue/reactivity'
-import userFormValidation from '../modules/userFormValidation.js'
+import { computed } from '@vue/reactivity'
+import Text from './Inputs/Text.vue'
+import Phone from './Inputs/Phone.vue'
+import Email from './Inputs/Email.vue'
+import Number from './Inputs/Number.vue'
+import Message from './Inputs/TextArea.vue'
 
 export default {
-  props: ['type', 'name', 'required', 'modelValue'],
+  components: {
+    Text,
+    Phone,
+    Email,
+    Number,
+    Message
+  },
+  props: ['type', 'name', 'required', 'modelValue', 'label'],
   setup (props, { emit }) {
-    // const inputText = ref('')
-    const inputLabel = ref('')
-    const inputPlaceholder = ref('')
-
-    const phoneRegex = /^[0-9\s]*$/;
-    const threeDigitRegex = /^(\d{3})$/gm
-    const sixDigitRegex = /^(\d{3})(\d{1,3})$/gm
-    const tenDigitRegex = /^(\d{3})(\d{3})(\d{1,4})$/gm
-    const twelveDigitRegex = /^(\d{1,3})(\d{3})(\d{3})(\d{4})$/gm
-
-    if (props.type === 'text') {
-      const temp = toRef(props.name)._object
-      inputPlaceholder.value = temp
-      inputLabel.value = temp
-    }
-    if (props.type === 'number') {
-      const temp = toRef(props.name)._object
-      inputPlaceholder.value = '100'
-      inputLabel.value = temp
-    }
-    else if (props.type === 'phone') {
-      inputPlaceholder.value = '(800) 555-1234'
-      inputLabel.value = 'Phone'
-    }
-    else if (props.type === 'email') {
-      inputPlaceholder.value = 'your@email.com'
-      inputLabel.value = 'Email'
-    }
-    else if (props.type === 'textarea') {
-      inputLabel.value = 'Message'
-    }
-
-    const numberValidation = event => {
-      if (phoneRegex.test(event.key)) {
-        return true
-      }
-      else {
-        event.preventDefault()
-        return false
-      }
-    }
-    const phoneMask = () => {
-      const cleanPhoneText = inputText.value.replace(/\D/gm, '')
-      let maskPhoneText = ''
-      if (cleanPhoneText.length <= 3) {
-        maskPhoneText = cleanPhoneText.replace(threeDigitRegex, "($1)")
-      }
-      else if (cleanPhoneText.length > 3 && cleanPhoneText.length < 7) {
-        maskPhoneText = cleanPhoneText.replace(sixDigitRegex, "($1) $2")
-      }
-      else if (cleanPhoneText.length >= 7 && cleanPhoneText.length <= 10) {
-        maskPhoneText = cleanPhoneText.replace(tenDigitRegex, "($1) $2-$3")
-      }
-      else {
-        maskPhoneText = cleanPhoneText.replace(twelveDigitRegex, "+$1 ($2) $3-$4")
-      }
-      inputText.value = maskPhoneText
-    }
-
     const inputText = computed(({
       get: () => props.modelValue,
       set: (value) => emit('update:modelValue', value)
     }))
 
-    // const error = ref('')
-    const { errors, validateNameField } = userFormValidation()
-
-    const validateInput = () => {
-      validateNameField('name', inputText.value)
-    }
-    // const error = computed(() => {
-    //   return inputText.value === '' ? 'The Input field is required' : ''
-    // })
-
-    return { inputText, inputLabel, inputPlaceholder, numberValidation, phoneMask, errors, validateInput }
+    return { inputText }
   }
 
 }
@@ -172,7 +93,7 @@ export default {
   }
 
   // INPUTS // ============================== //
-  .form_field {
+  :deep(.form_field) {
     font-family: inherit;
     width: 100%;
     border: 0;
@@ -199,34 +120,34 @@ export default {
       width: 100%;
     }
   }
-  .form_textarea {
+  :deep(.form_textarea) {
     resize: none;
     max-width: 100%;
     min-width: 100%;
   }
   // Placeholder text
-  .form_field::-webkit-input-placeholder {
+  :deep(.form_field::-webkit-input-placeholder) {
     opacity: 0;
     transition: opacity 0.2s ease-out;
   }
-  .form_field:focus::-webkit-input-placeholder {
+  :deep(.form_field:focus::-webkit-input-placeholder) {
     opacity: 1;
     transition-delay: 0.2s;
   }
-  .form_field::-moz-placeholder {
+  :deep(.form_field::-moz-placeholder) {
     opacity: 0;
     transition: opacity 0.2s ease-out;
   }
-  .form_field:focus::-moz-placeholder {
+  :deep(.form_field:focus::-moz-placeholder) {
     opacity: 1;
     transition-delay: 0.2s;
   }
 
-  .form_field[type="password"] {
+  :deep(.form_field[type="password"]) {
     letter-spacing: 0.3em;
   }
 
-  label {
+  :deep(label) {
     color: $light_purple; //light purple
     font-size: 1.2rem;
     font-weight: normal;
@@ -237,7 +158,7 @@ export default {
     transition: 0.3s ease all;
   }
 
-  .bar {
+  :deep(.bar) {
     position: relative;
     display: block;
     width: 100%;

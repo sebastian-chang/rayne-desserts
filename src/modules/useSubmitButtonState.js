@@ -1,10 +1,16 @@
 import { computed } from '@vue/reactivity'
 
-export default function useSubmitButtonState (user, errors) {
+export default function useSubmitButtonState (form, errors) {
   const isButtonDisabled = computed(() => {
     let disabled = true
-    for (let prop in user) {
-      if (!user[prop] || errors[prop]) {
+    for (let prop in form) {
+      if (typeof (form[prop]) === 'boolean') {
+        if (errors[prop]) {
+          disabled = true
+          break
+        }
+      }
+      else if (!form[prop] || errors[prop]) {
         disabled = true
         break
       }

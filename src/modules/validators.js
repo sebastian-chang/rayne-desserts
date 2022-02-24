@@ -1,10 +1,14 @@
 export default function useValidators () {
   const isEmpty = (name, value) => {
-    return !value ? `The ${name} field is required` : ''
+    return !value ? `${name} field is required` : ''
   };
 
   const minLength = (name, value, min) => {
-    return value.length < min ? `The ${name} field must be at least ${min} characters long.` : ''
+    return value.length < min ? `${name} field must be at least ${min} characters long.` : ''
+  };
+
+  const maxLength = (name, value, max) => {
+    return value.length >= max ? `${name} field must be at least ${max} characters long.` : ''
   };
 
   const isEmail = (name, value) => {
@@ -17,5 +21,18 @@ export default function useValidators () {
     return !regex ? `The ${name} field can have numbers only.` : ''
   }
 
-  return { isEmpty, minLength, isEmail, isNum };
+  const isCheckboxRequired = (name, value) => {
+    return !value.length ? `At least one option must be selected for ${name}.` : ''
+  }
+
+  const isToggleSwitchOn = (name, value) => {
+    if (value === undefined) {
+      return `Please select ${name}.`
+    }
+
+    return !value
+
+  }
+
+  return { isEmpty, minLength, maxLength, isEmail, isNum, isCheckboxRequired, isToggleSwitchOn };
 }
