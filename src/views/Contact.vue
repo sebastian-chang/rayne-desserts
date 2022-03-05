@@ -1,6 +1,6 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`">
-    <div class="contact">
+    <div class="contact container">
       <h1 class="contact-header">CONTACT US</h1>
       <div class="contact-section">
         <div class="contact-cards">
@@ -57,7 +57,7 @@
               :label="'Send'"
               :color="'#c8afd3'"
               :size="'md'"
-              :disabled=" isButtonDisabled || isSubmitting"
+              :disabled="isButtonDisabled || isSubmitting"
             />
           </form>
         </div>
@@ -128,18 +128,14 @@ export default {
 
 <style lang="scss" scoped>
 @include rayne($themes) {
-  .contact {
-    width: 90vw;
-    margin: auto;
-  }
   .contact-header {
     font-family: themed("cursive-font");
     font-weight: 400;
-    font-size: 24px;
+    font-size: themed("contact-header-size");
     text-align: center;
   }
   .contact-section {
-    width: 100%;
+    // width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -169,7 +165,7 @@ export default {
     h4 {
       font-family: themed("cursive-font");
       font-weight: 400;
-      font-size: $SB_H4_Font_Size;
+      font-size: themed("contact-form-header-size");
       margin-top: 10px;
       margin-bottom: 15px;
     }

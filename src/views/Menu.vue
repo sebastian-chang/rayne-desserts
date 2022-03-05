@@ -1,11 +1,17 @@
 <template>
-  <div class="default_layout_content" v-if="!isLoading">
-    <div class="paginated_list">
-      <ul class="menu_list category_grid">
-        <li class="category_list_item" v-for="item in filtered.items" :key="item.id">
-          <MenuItem :item="item" :cat="cat"/>
-        </li>
-      </ul>
+  <div :class="`rayne-${this.$store.state.theme}`">
+    <div class="default_layout_content container" v-if="!isLoading">
+      <div class="paginated_list">
+        <ul class="menu_list">
+          <li
+            class="category_list_item"
+            v-for="item in filtered.items"
+            :key="item.id"
+          >
+            <MenuItem :item="item" :cat="cat" />
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -46,42 +52,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.paginated_list > .menu_list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-flow: row;
-  grid-gap: 2rem;
-  background-color: #fff;
-  // background: steelblue;
-  margin-left: 0;
-  margin-right: 0;
+@include rayne($themes) {
+  .paginated_list > .menu_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: row;
+    grid-gap: 2rem;
+    background-color: #fff;
+    margin-left: 0;
+    margin-right: 0;
 
-  padding-left: 3.33vw;
-  padding-right: 3.33vw;
-  box-sizing: border-box;
-}
-.menu_list {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  list-style: none;
-}
-.category_grid {
-  box-sizing: border-box;
-  padding-left: 3.33333vw;
-  padding-right: 3.33333vw;
-  padding: 0;
-}
+    padding-left: 3vw;
+    padding-right: 3vw;
+    box-sizing: border-box;
+  }
+  .menu_list {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    list-style: none;
+  }
 
-.menu_list > li:nth-child(n) {
-  margin: 0;
-  float: none;
-  width: auto;
-  border: none;
-  // background-color: pink;
-  // background-color: #fff;
+  .menu_list > li:nth-child(n) {
+    margin: 0;
+    float: none;
+    width: auto;
+    border: none;
+  }
 }
 </style>

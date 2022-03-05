@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 /* @import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Nunito+Sans:wght@400;600;700&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Nunito+Sans:wght@400;600;700&family=Raleway:wght@400;600;700&display=swap");
 
@@ -29,24 +29,50 @@ body {
   overflow: none;
   margin-left: 0px;
 }
-#app {
-  height: 100vh;
-  width: 100vw;
-}
 .cursor {
   cursor: pointer;
   user-select: none;
 }
 .container {
-  /* display: block; */
-  /* max-width: 100%; */
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  width: 100%;
+  max-width: $SB_Container_XS;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  /* width: 100%; */
+
+  @media screen and (min-width: 576px) {
+    width: inherit;
+    max-width: $SB_Container_SM;
+    padding-left: $SB_Gutter_Width;
+    padding-right: $SB_Gutter_Width;
+  }
+  @media screen and (min-width: 768px) {
+    width: inherit;
+    max-width: $SB_Container_MD;
+    padding-left: $SB_Gutter_Width;
+    padding-right: $SB_Gutter_Width;
+  }
+  @media screen and (min-width: 992px) {
+    width: inherit;
+    max-width: $SB_Container_LG;
+    padding-left: $SB_Gutter_Width;
+    padding-right: $SB_Gutter_Width;
+  }
+  @media screen and (min-width: 1200px) {
+    width: inherit;
+    max-width: $SB_Container_XL;
+    padding-left: $SB_Gutter_Width;
+    padding-right: $SB_Gutter_Width;
+  }
+  @media screen and (min-width: 1400px) {
+    width: inherit;
+    max-width: $SB_Container_XXL;
+    padding-left: $SB_Gutter_Width;
+    padding-right: $SB_Gutter_Width;
+  }
 }
 </style>

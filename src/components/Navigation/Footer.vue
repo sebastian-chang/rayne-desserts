@@ -4,7 +4,10 @@
       <div class="container">
         <div class="row">
           <div class="footer-main">
-            <div class="footer-item text-area cursor" @click="onUserClick('About')">
+            <div
+              class="footer-item text-area cursor"
+              @click="onUserClick('About')"
+            >
               <h3 class="footer-header">Rayne Desserts</h3>
               <p>
                 All cakes and desserts are made to order fresh from scratch and
@@ -13,10 +16,14 @@
               </p>
             </div>
             <div class="contact footer-item text-area">
-              <h3 class="footer-header cursor" @click="onUserClick('Contact')">Contact Us</h3>
+              <h3 class="footer-header cursor" @click="onUserClick('Contact')">
+                Contact Us
+              </h3>
             </div>
             <div class="contact footer-item text-area">
-              <h3 class="footer-header cursor" @click="onUserClick('FAQ')">FAQ</h3>
+              <h3 class="footer-header cursor" @click="onUserClick('FAQ')">
+                FAQ
+              </h3>
             </div>
             <div class="follow-us footer-item text-area">
               <h3 class="footer-header">Follow Us</h3>
@@ -63,7 +70,6 @@ export default {
     const router = useRouter()
     const onUserClick = (linkTo) => {
       router.push({ name: linkTo })
-      // window.scrollTo(0,0);
     }
     return { instagram: faInstagram, facebook: faFacebookF, email: faEnvelope, address: faMapMarkerAlt, phone: faPhoneAlt, youtube: faYoutube, onUserClick }
   }
@@ -83,19 +89,19 @@ export default {
     font-family: themed("cursive-font");
     font-weight: 400;
     font-size: 24px;
-    color: white;
+    color: themed("footer-font-color");
 
     margin-top: 80px;
     padding-top: 55px;
     padding-bottom: 55px;
 
     .footer-header {
-      font-size: $SB_H3_Font_Size;
+      font-size: themed("footer-header-font-size");
 
       &:after {
         content: " ";
         display: block;
-        border: 1px solid #fff;
+        border: themed("footer-underline-border");
         border-radius: 4px;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
@@ -108,7 +114,8 @@ export default {
     }
 
     p {
-      font-size: $SB_Base_Font_Size;
+      padding-right: 1.5rem;
+      font-size: themed("paragraph-font-size");
       font-family: themed("serif-font");
       letter-spacing: 0.5px;
     }
@@ -116,19 +123,6 @@ export default {
     @media screen and (max-width: 575px) {
       height: fit-content;
       padding-bottom: 0px;
-    }
-  }
-  .container {
-    width: $SB_Container_Large;
-    max-width: 100%;
-    margin: auto;
-    padding-left: $SB_Gutter_Width;
-    padding-right: $SB_Gutter_Width;
-
-    @media screen and (max-width: 767px) {
-      width: inherit;
-      padding-left: $SB_Gutter_Width;
-      padding-right: $SB_Gutter_Width;
     }
   }
   .footer-main {
@@ -159,18 +153,18 @@ export default {
     }
 
     &:hover {
-      color: $light_purple;
-      --webkit-filter: drop-shadow(1px 1px 5px $dark_purple);
-      filter: drop-shadow(1px 1px 5px $dark_purple);
+      color: themed("footer-icons-hover");
+      --webkit-filter: themed("footer-icons-hover-filter");
+      filter: themed("footer-icons-hover-filter");
     }
   }
 
   .footer-copyright {
     display: flex;
     flex-wrap: wrap;
-    background-color: $light_purple;
+    background-color: themed("footer-copyright-background-color");
     line-height: 2em;
-    font-family: $SB_Main_Font;
+    font-family: themed("serif-font");
     font-size: $SB_Small_Font_Size;
 
     .footer-copyright-main {

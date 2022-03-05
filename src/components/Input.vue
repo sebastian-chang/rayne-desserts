@@ -125,6 +125,25 @@ export default {
     max-width: 100%;
     min-width: 100%;
   }
+  :deep(.invalid){
+    color: $color_red_100;
+    border-bottom: 1px solid $color_red_100;
+
+    &:focus ~ label,
+    &~ label{
+      top: -14px;
+      font-family: initial;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $color_red_100;
+    }
+    &:focus ~ .bar{
+      &::before{
+
+        background: $color_red_100;
+      }
+    }
+  }
   // Placeholder text
   :deep(.form_field::-webkit-input-placeholder) {
     opacity: 0;
@@ -172,6 +191,14 @@ export default {
       transition: 0.3s ease all;
       left: 0%;
     }
+  }
+
+  :deep(.error_label){
+    color: $color_red_100;
+    text-transform: capitalize;
+    font-size: $SB_Small_Font_Size;
+    font-weight: 700;
+    padding-top: 5px;
   }
 }
 </style>

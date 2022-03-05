@@ -1,6 +1,6 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`">
-    <div class="about">
+    <div class="about container">
       <div class="container greeting">
         <div class="about_title sideways">
           <p>About us</p>
@@ -50,30 +50,26 @@
 <style lang="scss" scoped>
 @include rayne($themes) {
   .about {
-    font-family: source-serif-pro;
+    font-family: themed('serif-font');
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
     letter-spacing: 0.04em;
     line-height: 2.3em;
     text-transform: none;
-    // background-color: rebeccapurple;
     box-sizing: border-box;
-    // padding: 10px 110px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    // padding-top: 15vh;
     padding-right: 0;
     position: relative;
-    // overflow: hidden;
   }
   .greeting,
   .description,
   .other {
     pointer-events: auto;
-    font-family: source-serif-pro;
+    font-family: themed('serif-font');
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
@@ -88,7 +84,6 @@
     // aspect-ratio: 16/9;
   }
   .greeting {
-    // background-color: darkcyan;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -111,7 +106,6 @@
     }
   }
   .description {
-    // background-color: wheat;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -137,14 +131,13 @@
     }
   }
   .other {
-    // background-color: lightblue;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
     align-items: center;
   }
   .sideways {
-    font-family: source-serif-pro;
+    font-family: themed('serif-font');
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
@@ -152,25 +145,17 @@
     line-height: 2.3em;
     text-transform: none;
     color: #242424;
-    // height: auto;
-    padding-bottom: 16px;
-    // clear: none;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 0;
     box-sizing: border-box;
-    // margin-right: auto;
-    // margin-left: auto;
-    // position: relative;
     order: -1;
     justify-self: flex-start;
-    // top: 50%;
-    // width: 30vw;
-    // background-color: darkgoldenrod;
     transform: translate(-50%, -50%) rotate(270deg);
 
     p {
-      font-family: source-serif-pro;
+      font-family: themed('serif-font');
       font-weight: 300;
       font-style: normal;
       font-size: 14px;
@@ -187,7 +172,7 @@
     order: 2;
   }
   .main_content {
-    font-family: source-serif-pro;
+    font-family: themed('serif-font');
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
@@ -200,10 +185,9 @@
     margin-left: auto;
     margin-right: auto;
     width: 30vw;
-    // margin-left: -10vw;
 
     p {
-      font-family: source-serif-pro;
+      font-family: themed('serif-font');
       font-weight: 300;
       font-style: normal;
       font-size: 38px;

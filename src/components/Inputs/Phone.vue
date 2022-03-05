@@ -5,11 +5,12 @@
         type="text"
         :id="name"
         class="form_field"
+        :class="errors[name] ? 'invalid' : ''"
         :placeholder="inputPlaceholder"
         v-model="inputText"
         @input="$emit('update:modelValue', $event.target.value), phoneMask()"
         @keydown.delete="onDelete($event)"
-        @keyup="validateInput"
+        @keyup="keyupValidate"
         @blur="validateInput"
         autocomplete="off"
         required
@@ -18,7 +19,9 @@
       <span class="bar"></span>
       <label>{{ inputLabel }}</label>
     </div>
-    <div class="ui basic label pointing red" v-if="errors[name]">{{ errors[name] }}</div>
+    <div class="error_label" v-if="errors[name]">
+      {{ errors[name] }}
+    </div>
   </div>
 </template>
 
@@ -32,6 +35,7 @@ export default {
     const inputLabel = ref(props.label)
     const cleanInput = ref('')
     const inputPlaceholder = ref('(800) 555-1234')
+    const touched = ref(false)
 
     const threeDigitRegex = /^(\d{3})$/gm
     const sixDigitRegex = /^(\d{3})(\d{1,3})$/gm
@@ -40,7 +44,16 @@ export default {
 
     const { errors, validatePhoneField } = userFormValidation()
 
+    const keyupValidate = () => {
+      if (touched.value) {
+        validateInput()
+      }
+    }
+
     const validateInput = () => {
+      if (!touched.value) {
+        touched.value = true
+      }
       validatePhoneField(props.name, cleanInput.value)
     }
     const phoneMask = () => {
@@ -70,7 +83,7 @@ export default {
       }, (100));
     }
 
-    return { inputText, inputLabel, inputPlaceholder, validateInput, errors, phoneMask, onDelete }
+    return { inputText, inputLabel, inputPlaceholder, validateInput, errors, phoneMask, onDelete, keyupValidate }
   }
 }
 </script>

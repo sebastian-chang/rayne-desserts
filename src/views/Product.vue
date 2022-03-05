@@ -1,6 +1,6 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`">
-    <div class="product">
+    <div class="product container">
       <div v-if="!isLoading" class="product_main">
         <div class="product_images">
           <ul class="product_image_list">

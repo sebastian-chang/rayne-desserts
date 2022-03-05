@@ -1,0 +1,30 @@
+$dessertVariables: (
+  main-color: $color-purple-light,
+  secondary-color: $color-purple-dark,
+  icon-color: $color-white-100,
+  serif-font: $SB_Main-Dessert,
+  cursive-font: $SB_Secondary-Dessert,
+  border-radius: 10px,
+  heart-color: $color-purple-light,
+  box-shadow: rgba(200, 175, 211, 0.2),
+  box-shadow-hover: rgba(165, 117, 186, 0.2),
+  // NEW STUFF
+  paragraph-font-size: $SB_Base_Font_Size,
+
+  footer-box-shadow: inset 0px 0px 200px black,
+  footer-font-color: $color-white-100,
+  footer-header-font-size: $SB_H3_Font_Size,
+  footer-underline-border: 1px solid $color-white-100,
+  footer-icons-hover: $light-purple,
+  footer-icons-hover-filter: drop-shadow(1px 1px 5px $dark-purple),
+  footer-copyright-background-color: $light-purple,
+
+  navbar-nav-border: $color-purple-dark 2px dashed,
+  navbar-nav-link-color: $color-white-100,
+  navbar-nav-link-highlight: $color-purple-dark,
+
+  contact-header-size: $SB_H3_Font_Size,
+  contact-form-header-size: $SB_H4_Font_Size,
+
+  faq-title-font-size: $SB_H1_Font_Size,
+);

@@ -5,6 +5,7 @@
         type="number"
         :id="name"
         class="form_field"
+        :class="errors[name] ? 'invalid' : ''"
         :placeholder="inputPlaceholder"
         min="0"
         v-model="inputText"
@@ -19,7 +20,9 @@
       <span class="bar"></span>
       <label>{{ inputLabel }}</label>
     </div>
-    <div class="ui basic label pointing red" v-if="errors[name]">{{ errors[name] }}</div>
+    <div class="error_label" v-if="errors[name]">
+      {{ errors[name] }}
+    </div>
   </div>
 </template>
 
