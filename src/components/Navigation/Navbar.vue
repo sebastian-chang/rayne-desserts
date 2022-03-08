@@ -1,5 +1,5 @@
 <template>
-  <header :class="`rayne-${this.$store.state.theme}`">
+  <header :class="`rayne-${this.$store.state.theme}`" v-if="hasLoaded">
     <div class="navbar container">
       <nav>
         <div class="links">
@@ -68,6 +68,7 @@ export default {
   setup () {
     const menuItems = ref([])
     const showDropdown = ref(false)
+    const hasLoaded = ref(false)
     const router = useRouter()
     // const route = useRoute()
     const routeSelected = ref('')
@@ -76,6 +77,7 @@ export default {
       const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu`)
       const data = await res.json()
       menuItems.value = await data
+      hasLoaded.value = await true
     })
 
     const onUserClick = (linkTo, category) => {
@@ -86,7 +88,7 @@ export default {
         router.push({ name: linkTo })
       }
     }
-    return { menuItems, showDropdown, onUserClick, routeSelected }
+    return { menuItems, showDropdown, onUserClick, routeSelected, hasLoaded }
   }
 }
 </script>
