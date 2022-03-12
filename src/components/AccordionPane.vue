@@ -56,7 +56,7 @@ export default {
     animation-duration: 0.3s;
   }
   .description {
-    background-color: themed('main-color');
+    background-color: themed('faq-background-color');
     border-radius: themed('border-radius');
     overflow: hidden;
     max-height: 0;

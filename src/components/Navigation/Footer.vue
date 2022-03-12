@@ -4,11 +4,8 @@
       <div class="container">
         <div class="row">
           <div class="footer-main">
-            <div
-              class="footer-item text-area cursor"
-              @click="onUserClick('About')"
-            >
-              <h3 class="footer-header">Rayne Desserts</h3>
+            <div class="footer-item text-area" @click="onUserClick('About')">
+              <h3 class="footer-header cursor">Rayne Desserts</h3>
               <p>
                 All cakes and desserts are made to order fresh from scratch and
                 are never frozen. Gluten Free, Dairy Free & Vegan options are
@@ -110,6 +107,7 @@ export default {
         -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
         width: 50px;
         margin: 10px 0px;
+        transition: color 0.3s ease-in-out;
       }
     }
 
@@ -135,6 +133,19 @@ export default {
   .footer-item {
     margin-bottom: 30px;
     width: calc(25% - calc($SB_Gutter_Width / 2));
+
+    > .cursor {
+      transition: color 0.3s ease-in-out;
+      &:hover {
+        color: themed("footer-icons-hover");
+        --webkit-filter: themed("footer-icons-hover-filter");
+        filter: themed("footer-icons-hover-filter");
+
+        // &:after {
+        //   border: themed("footer-border-hover");
+        // }
+      }
+    }
 
     @media screen and (max-width: 575px) {
       width: 100%;

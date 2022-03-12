@@ -89,7 +89,7 @@ export default {
   }
   .product_card_name {
     max-width: 100%;
-    color: themed('secondary-color');
+    color: themed('main-font-color');
     font-family: themed('cursive-font');
     font-size: $SB_H3_Font_Size;
     font-weight: 600;

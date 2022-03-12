@@ -54,9 +54,8 @@
 
             <Button
               id="contact-submit-button"
-              :label="'Send'"
-              :color="'#c8afd3'"
-              :size="'md'"
+              label="Send"
+              size="md"
               :disabled="isButtonDisabled || isSubmitting"
             />
           </form>
@@ -167,7 +166,7 @@ export default {
       font-weight: 400;
       font-size: themed("contact-form-header-size");
       margin-top: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 36px;
     }
   }
   .contact-form {

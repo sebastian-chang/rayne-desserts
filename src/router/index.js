@@ -79,36 +79,43 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
+    path: "/instagram",
     name: "Instagram",
     beforeEnter () { window.open('https://www.instagram.com/raynedesserts/', '_blank') },
     component: Home,
   },
   {
+    path: "/facebook",
     name: "Facebook",
     beforeEnter () { window.open('https://www.facebook.com/raynedesserts/', '_blank') },
     component: Home,
   },
   {
+    path: "/youtube",
     name: "Youtube",
     beforeEnter () { window.open('https://www.youtube.com/raynedesserts/', '_blank') },
     component: Home,
   },
   {
+    path: "/wedding-wire",
     name: "WeddingWire",
     beforeEnter () { window.open('https://www.weddingwire.com/biz/rayne-desserts/e0568849f5677f01.html', '_blank') },
     component: Home,
   },
   {
+    path: "/phone",
     name: "Phone",
     beforeEnter () { location.href = ('tel:' + process.env.VUE_APP_PHONE) },
     component: Contact,
   },
   {
+    path: "/email",
     name: "Email",
     beforeEnter () { location.href = ('mailTo:' + process.env.VUE_APP_EMAIL) },
     component: Contact,
   },
   {
+    path: "/address",
     name: "Address",
     beforeEnter () { window.open(process.env.VUE_APP_GOOGLE_LOCATION, '_blank') },
     component: Contact,

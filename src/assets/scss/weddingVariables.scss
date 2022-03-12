@@ -1,0 +1,59 @@
+$weddingVariables: (
+  main-color: $color-white-100,
+  secondary-color: $color-black-200,
+  icon-color: $color-white-100,
+  serif-font: $SB_Main-Wedding,
+  cursive-font: $SB_Secondary-Wedding,
+  border-radius: 0px,
+  heart-color: $color-black-200,
+  box-shadow: rgba(0, 0, 0, 0.2),
+  box-shadow-hover: rgba(0, 0, 0, 0.2),
+  // NEW STUFF
+  main-font-color: $color-black-300,
+  paragraph-font-size: $SB_Base_Font_Size,
+
+  footer-box-shadow: inset 0px 0px 200px black,
+  footer-font-color: $color-white-100,
+  footer-header-font-size: $SB_H3_Font_Size,
+  footer-underline-border: 1px solid $color-white-100,
+  footer-icons-hover: $color-black-100,
+  footer-border-hover: 1px solid $color-black-100,
+  footer-icons-hover-filter: drop-shadow(1px 1px 5px $color-black-300),
+  footer-copyright-background-color: $color-black-300,
+
+  navbar-nav-border: none,
+  navbar-nav-border-bottom: $color-black-200 2px solid,
+  navbar-nav-link-color: $color-black-200,
+  navbar-nav-link-highlight: $color-black-300,
+  navbar-background-color: $color-white-off,
+
+  contact-header-size: $SB_H3_Font_Size,
+  contact-form-header-size: $SB_H4_Font_Size,
+  contact-border-color: $color-black-200,
+  contact-border-highlight: $color-black-300,
+
+  faq-title-font-size: $SB_H1_Font_Size,
+  faq-background-color: $color-white-off,
+
+  form-label-color: $color-black-200,
+  form-field-color: $color-black-300,
+  form-border-bottom: 1px solid $color-black-200,
+
+  button-background-color: $color-black-200,
+  button-background-highlight: $color-black-300,
+  button-background-disabled: lighten($color-black-200, 30%),
+  button-font-color: $color-white-100,
+
+  checkbox-font-color: $color-black-200,
+  checkbox-font-highlight: $color-black-300,
+  checkbox-check-border: 2px solid $color-white-100,
+  checkbox-border: 1px solid $color-black-200,
+  checkbox-border-highlight: 2px solid $color-black-300,
+  checkbox-background-color: $color-white-100,
+  checkbox-background-checked: $color-black-200,
+  checkbox-after-transition: transform 0.3s cubic-bezer(0.2, 0.85, 0.32, 1.2) opacity 0.3s,
+
+  switch-background-color: $color-black-200,
+  switch-background-hightlight: $color-black-300,
+  switch-focus-boxshadow: 2px 2px 10px $color-black-300,
+);

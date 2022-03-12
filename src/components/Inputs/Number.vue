@@ -10,7 +10,7 @@
         min="0"
         v-model="inputText"
         @input="$emit('update:modelValue', $event.target.value)"
-        @keyup="validateInput"
+        @keyup="keyupValidate"
         @keypress="numberValidation($event)"
         @blur="validateInput"
         autocomplete="off"
@@ -35,12 +35,22 @@ export default {
     const inputText = ref('')
     const inputLabel = ref(props.label)
     const inputPlaceholder = ref('100')
+    const touched = ref(false)
 
     const numberRegex = /^[0-9\s]*$/;
 
     const { errors, validateNameField } = userFormValidation()
 
+    const keyupValidate = () => {
+      if (touched.value) {
+        validateInput()
+      }
+    }
+
     const validateInput = () => {
+      if (!touched.value) {
+        touched.value = true
+      }
       validateNameField(props.name, inputText.value)
     }
 
@@ -54,7 +64,7 @@ export default {
       }
     }
 
-    return { inputText, inputLabel, inputPlaceholder, validateInput, errors, numberValidation }
+    return { inputText, inputLabel, inputPlaceholder, validateInput, errors, numberValidation, keyupValidate }
   }
 }
 </script>

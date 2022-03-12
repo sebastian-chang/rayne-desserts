@@ -2,19 +2,21 @@
   <header :class="`rayne-${this.$store.state.theme}`" v-if="hasLoaded">
     <div class="navbar container">
       <nav>
-        <div class="links">
-            <router-link :to="{ name: 'Home' }">
-              <img class="logo" src="../../assets/R.jpg" />
-              <!-- Rayne Desserts -->
-            </router-link>
+        <div class="logo_link">
+          <router-link :to="{ name: 'Home' }">
+            <img class="logo" src="../../assets/R.jpg" />
+            <!-- Rayne Desserts -->
+          </router-link>
         </div>
         <div class="links">
           <span
             @mouseover="showDropdown = true"
             @mouseleave="showDropdown = false"
           >
-            <router-link :to="{ name: 'Menu', params: { cat: menuItems[0].category } }">
-            <!-- <router-link :to="{ name: 'Menu', params: { cat: 'all' } }"> -->
+            <router-link
+              :to="{ name: 'Menu', params: { cat: menuItems[0].category } }"
+            >
+              <!-- <router-link :to="{ name: 'Menu', params: { cat: 'all' } }"> -->
               Menu
             </router-link>
             <ul
@@ -25,6 +27,7 @@
               <div class="menu_dropdown_container">
                 <li v-for="item in menuItems" :key="item.id">
                   <router-link
+                  :class="this.$store.state.theme === 'weddings' ? 'nav-link-grow-up' : '' "
                     :to="{ name: 'Menu', params: { cat: item.category } }"
                   >
                     {{ item.category }}
@@ -98,40 +101,36 @@ export default {
   .navbar {
     font-family: themed("serif-font");
     // width: 75vw;
-    background: themed("main-color");
+    background: themed("navbar-background-color");
     padding: 10px;
     margin: 40px auto;
     margin-bottom: 60px;
     border-radius: themed("border-radius");
     top: 0px;
-    // background-color: lawngreen;
   }
   nav {
     display: flex;
     align-items: center;
     border: themed("navbar-nav-border");
-    margin: 0 auto;
-    padding: 10px 27%;
+    margin: 0;
+    padding: 10px;
+    // width: 700px;
     // padding-top: 10px;
     // padding-bottom: 10px;
   }
-  // .home_logo {
-  //   // left: 0px;
-  //   display: block;
-  //   float: left;
-  // }
   .logo {
     display: block;
     max-height: 100px;
     border-radius: 50%;
     overflow: hidden;
     position: absolute;
-    margin-top: -6px;
+    // margin-top: -6px;
     // margin-left: 20px;
     z-index: 1;
-    top: -30px;
-    // left: -300px;
-    right: 300px;
+    // top: -30px;
+    top: 25px;
+    left: 200px;
+    // right: 300px;
   }
   nav h1 {
     margin-left: 20px;
@@ -170,7 +169,8 @@ export default {
     margin-left: -10px;
     border-style: solid;
     border-width: 0 10px 10px 10px;
-    border-color: transparent transparent themed("secondary-color") transparent;
+    border-color: transparent transparent themed("navbar-nav-link-highlight")
+      transparent;
   }
   .navbar_dropdown {
     position: absolute;
@@ -178,7 +178,7 @@ export default {
     transform: scaleY(0);
     width: auto;
     transform-origin: top;
-    background-color: themed("main-color");
+    background-color: themed("navbar-background-color");
     transition: 0.25s;
     padding-left: 0;
     padding-bottom: 20px;
@@ -201,6 +201,16 @@ export default {
         }
       }
     }
+  }
+
+  .nav-link-grow-up::before {
+    height: 0%;
+    width: 100%;
+    bottom: 0px;
+  }
+
+  .nav-link-grow-up:hover::before {
+    height: 5px;
   }
   .navbar_dropdown.display {
     transform: scaleY(1);

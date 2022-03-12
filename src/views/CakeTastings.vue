@@ -6,8 +6,16 @@
         <div class="cake_description">
           <h1 class="tasting_title">Cake Design</h1>
           <div>
-            <p>We take great pride in designing your cake for your special day. Something something something.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus quisquam blanditiis voluptate eius repudiandae autem placeat dicta vero fugit obcaecati itaque quis, sed maiores, ex commodi aliquid sapiente veritatis quae.</p>
+            <p>
+              We take great pride in designing your cake for your special day.
+              Something something something.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+              quisquam blanditiis voluptate eius repudiandae autem placeat dicta
+              vero fugit obcaecati itaque quis, sed maiores, ex commodi aliquid
+              sapiente veritatis quae.
+            </p>
           </div>
         </div>
         <div class="cake_image">
@@ -23,9 +31,17 @@
         <div class="cake_description right">
           <h1 class="tasting_title">Cake Tastings</h1>
           <div>
-            <p>We offer cake tastings with a variety of different flavors so you can find the taste that you would share with those closest to you.</p>
+            <p>
+              We offer cake tastings with a variety of different flavors so you
+              can find the taste that you would share with those closest to you.
+            </p>
             <p>Something something something.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, explicabo laudantium est ab blanditiis sed ipsum laborum magnam mollitia soluta, necessitatibus recusandae dolor ipsam illum error maiores, quaerat modi? Deleniti!</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Accusamus, explicabo laudantium est ab blanditiis sed ipsum
+              laborum magnam mollitia soluta, necessitatibus recusandae dolor
+              ipsam illum error maiores, quaerat modi? Deleniti!
+            </p>
           </div>
         </div>
         <div class="cake_image">
@@ -41,8 +57,16 @@
         <div class="cake_description right">
           <h1 class="tasting_title">Cake Sizes</h1>
           <div>
-            <p>Something about cake sizes, serving deminesions of each cake slice.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae aliquid voluptas corrupti, animi architecto doloribus fugiat! Eos excepturi quis qui itaque illo alias deleniti, a fugit asperiores tempore mollitia quasi!</p>
+            <p>
+              Something about cake sizes, serving deminesions of each cake
+              slice.
+            </p>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+              aliquid voluptas corrupti, animi architecto doloribus fugiat! Eos
+              excepturi quis qui itaque illo alias deleniti, a fugit asperiores
+              tempore mollitia quasi!
+            </p>
           </div>
         </div>
         <div class="cake_image">
@@ -58,9 +82,20 @@
         <div class="cake_description">
           <h1 class="tasting_title">Cake Delivery</h1>
           <div>
-            <p>Delivery prices may vary depending on the distance to the venue. We will happily setup the cake for you at the time of delivery.</p>
-            <p>We have cake stands for a rental fee. Something something something.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam quae qui provident laudantium eius? Recusandae dolorem totam, dicta explicabo esse reiciendis, quae ut voluptatem, quia cum facere doloremque quidem consectetur!</p>
+            <p>
+              Delivery prices may vary depending on the distance to the venue.
+              We will happily setup the cake for you at the time of delivery.
+            </p>
+            <p>
+              We have cake stands for a rental fee. Something something
+              something.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam
+              quae qui provident laudantium eius? Recusandae dolorem totam,
+              dicta explicabo esse reiciendis, quae ut voluptatem, quia cum
+              facere doloremque quidem consectetur!
+            </p>
           </div>
         </div>
         <div class="cake_image">
@@ -200,14 +235,14 @@ export default {
       'width': '100%',
       'outline': '0',
       'font-size': '1.3rem',
-      'color': '#a575ba',
       'padding': '15px 0',
       'margin-top': '10px',
       'background': 'transparent',
       'border': 'none',
-      'border-bottom': '1px solid #c8afd3',
-      '--vdp-hover-bg-color': '#c8afd3',
-      '--vdp-selected-bg-color': '#a575ba',
+      'color': '#19110b',
+      'border-bottom': '1px solid #8a8a8a',
+      '--vdp-hover-bg-color': '#8a8a8a',
+      '--vdp-selected-bg-color': '#19110b',
     }
     const otherItems = [
       {

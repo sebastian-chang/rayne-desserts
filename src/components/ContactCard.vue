@@ -64,7 +64,7 @@ export default {
 <style lang="scss" scoped>
 @include rayne($themes) {
   .contact-card {
-    border: 1px solid themed('main-color');
+    border: 1px solid themed('contact-border-color');
     border-radius: 5px;
     padding: 25px;
     margin: 15px;
@@ -76,7 +76,7 @@ export default {
   }
   .contact-icon {
     display: inline-block;
-    background: themed('main-color');
+    background: themed('contact-border-color');
     color: white;
     font-size: 20px;
     text-align: center;
@@ -88,10 +88,10 @@ export default {
     transition: all 0.3s linear;
   }
   .contact-card:hover {
-    border: 1px solid $dark-purple;
+    border: 1px solid themed('contact-border-highlight');
   }
   .contact-card:hover .contact-icon {
-    background: $dark-purple;
+    background: themed('contact-border-highlight');
   }
   .contact-label {
     letter-spacing: 0;

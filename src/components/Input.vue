@@ -3,7 +3,7 @@
     <!-- Normal text input -->
     <div class="group">
       <Text
-        v-if="type==='text'"
+        v-if="type === 'text'"
         :name="name"
         :label="label"
         v-model="inputText"
@@ -37,7 +37,7 @@
       />
       <!-- Phone input -->
       <Phone
-        v-if="type ==='phone'"
+        v-if="type === 'phone'"
         :name="name"
         :label="label"
         v-model="inputText"
@@ -45,7 +45,7 @@
       />
       <!-- Textarea input -->
       <Message
-        v-if="type ==='textarea'"
+        v-if="type === 'textarea'"
         :name="name"
         :label="label"
         v-model="inputText"
@@ -99,11 +99,11 @@ export default {
     border: 0;
     outline: 0;
     font-size: 1.3rem;
-    color: $dark_purple; //dark purple
+    color: themed("form-field-color"); //dark purple
     padding: 7px 0;
     background: transparent;
     display: block;
-    border-bottom: 1px solid $light_purple; //light purple
+    border-bottom: themed("form-border-bottom"); //light purple
 
     &:focus {
       outline: none;
@@ -114,7 +114,7 @@ export default {
       font-family: inherit;
       font-size: 1rem;
       font-weight: 700;
-      color: $dark_purple; //dark-purple
+      color: themed("form-field-color"); //dark-purple
     }
     &:focus ~ .bar:before {
       width: 100%;
@@ -125,21 +125,20 @@ export default {
     max-width: 100%;
     min-width: 100%;
   }
-  :deep(.invalid){
+  :deep(.invalid) {
     color: $color_red_100;
     border-bottom: 1px solid $color_red_100;
 
     &:focus ~ label,
-    &~ label{
+    & ~ label {
       top: -14px;
       font-family: initial;
       font-size: 1rem;
       font-weight: 700;
       color: $color_red_100;
     }
-    &:focus ~ .bar{
-      &::before{
-
+    &:focus ~ .bar {
+      &::before {
         background: $color_red_100;
       }
     }
@@ -167,7 +166,7 @@ export default {
   }
 
   :deep(label) {
-    color: $light_purple; //light purple
+    color: themed("form-label-color"); //light purple
     font-size: 1.2rem;
     font-weight: normal;
     position: absolute;
@@ -187,13 +186,13 @@ export default {
       width: 0;
       bottom: 0px;
       position: absolute;
-      background: $dark_purple; //dark-purple
+      background: themed("form-field-color"); //dark-purple
       transition: 0.3s ease all;
       left: 0%;
     }
   }
 
-  :deep(.error_label){
+  :deep(.error_label) {
     color: $color_red_100;
     text-transform: capitalize;
     font-size: $SB_Small_Font_Size;
