@@ -1,7 +1,11 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`">
-    <div class="contact-card">
-      <div v-if="card.label !== ''" @click="onUserClick(card.label)" class="cursor">
+    <div class="contact-card cursor">
+      <div
+        v-if="card.label !== ''"
+        @click="onUserClick(card.label)"
+        class="contact-card-header"
+      >
         <div class="contact-icon">
           <FontAwesomeIcon :icon="card.icon" />
         </div>
@@ -64,21 +68,27 @@ export default {
 <style lang="scss" scoped>
 @include rayne($themes) {
   .contact-card {
-    border: 1px solid themed('contact-border-color');
+    border: 1px solid themed("contact-border-color");
     border-radius: 5px;
     padding: 25px;
-    margin: 15px;
+    margin: 15px auto;
     max-width: 275px;
+    // height: 200px;
     text-align: left;
     // font-family: themed('serif-font');
     transition: all 0.3s linear;
     overflow-wrap: break-word;
   }
+  .contact-card-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   .contact-icon {
     display: inline-block;
-    background: themed('contact-border-color');
+    grid-column: 1/1;
+    background: themed("contact-border-color");
     color: white;
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
     height: 50px;
     width: 50px;
@@ -88,23 +98,34 @@ export default {
     transition: all 0.3s linear;
   }
   .contact-card:hover {
-    border: 1px solid themed('contact-border-highlight');
+    border: 1px solid themed("contact-border-highlight");
   }
   .contact-card:hover .contact-icon {
-    background: themed('contact-border-highlight');
+    background: themed("contact-border-highlight");
   }
   .contact-label {
+    grid-column: 2/4;
     letter-spacing: 0;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 15px;
-    font-family: themed('cursive-font');
+    font-family: themed("cursive-font");
     font-weight: 400;
-    font-size: 20px;
+    font-size: 25px;
+    color: themed("contact-label-color");
     transition: all 0.3s linear;
   }
   .contact-text {
+    grid-column: 1/4;
     letter-spacing: 0.5px;
     transition: all 0.3s linear;
+    margin: 50px auto;
+    // margin-top: 50px;
+  }
+
+  @media screen and (min-width: 576px) {
+    .contact-text{
+      margin: 50px 0px;
+    }
   }
 }
 </style>

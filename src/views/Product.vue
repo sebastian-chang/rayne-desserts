@@ -18,12 +18,15 @@
           <div class="product_details_header">
             <div class="product_favorite">
               <button class="product_add_favorite" @click="addFavorite()">
-                <FontAwesomeIcon class="product_icon" :icon="favorite ? liked : heart" />
+                <FontAwesomeIcon
+                  class="product_icon"
+                  :icon="favorite ? liked : heart"
+                />
               </button>
             </div>
           </div>
-          <h1 class="product_details_title">{{state.product.name}}</h1>
-          <div class="product_description">{{state.product.description}}</div>
+          <h1 class="product_details_title">{{ state.product.name }}</h1>
+          <div class="product_description">{{ state.product.description }}</div>
           <div class="product_ingredients">
             <h3 class="product_label">Contains</h3>
             <ul class="product_ingredients_list">
@@ -110,7 +113,7 @@ export default {
 @include rayne($themes) {
   .product_main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     // grid-auto-flow: row;
     // grid-gap: 2rem;
     background-color: #fff;
@@ -142,7 +145,7 @@ export default {
       box-sizing: border-box;
       position: relative;
       display: block;
-      height: 40vh;
+      // height: 40vh;
     }
     .odd:first-child,
     .even:first-child,
@@ -158,7 +161,7 @@ export default {
     max-width: 100%;
     max-height: 100%;
     width: 100%;
-    border-radius: themed('border-radius');
+    border-radius: themed("border-radius");
     // background: purple;
   }
   .product_image_list .product_image_item:first-child .product_image {
@@ -203,7 +206,7 @@ export default {
         border: none;
 
         .product_icon {
-          color: themed('heart-color');
+          color: themed("heart-color");
           height: 1rem;
           width: 1rem;
         }
@@ -218,9 +221,9 @@ export default {
     }
 
     .product_details_title {
-      font-family: themed('cursive-font');
+      font-family: themed("cursive-font");
       font-size: $SB_H1_Font_Size;
-      color: themed('secondary-color');
+      color: themed("secondary-color");
       letter-spacing: 0;
       line-height: 2.5rem;
       font-weight: 700;
@@ -231,9 +234,9 @@ export default {
       margin-top: 2.5rem;
     }
     .product_label {
-      font-family: themed('cursive-font');
+      font-family: themed("cursive-font");
       font-size: $SB_H4_Font_Size;
-      color: themed('secondary-color');
+      color: themed("secondary-color");
       line-height: 1.25rem;
       letter-spacing: 0.025rem;
       margin: 3rem 0.5rem 1rem 0.5rem;
@@ -241,7 +244,7 @@ export default {
     .product_ingredients_list {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-evenly;
+      justify-content: space-between;
       // padding-bottom: 48px;
       // margin-left: 0;
       padding-left: 0;
@@ -251,7 +254,7 @@ export default {
         margin-left: 1rem;
         margin-bottom: 10px;
         list-style: none;
-        font-size: themed('serif-font');
+        font-size: themed("serif-font");
 
         span {
           margin-left: 15px;
@@ -291,6 +294,31 @@ export default {
         }
       }
     }
+  }
+  @media screen and (min-width: 768px) {
+    .product_main {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .product_image_item {
+      box-sizing: border-box;
+      position: relative;
+      display: block;
+      // height: 40vh;
+    }
+    .product_ingredients_list{
+      justify-content: space-evenly;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    // .product_main {
+    //   grid-template-columns: repeat(3, 1fr);
+    // }
+    .product_image_item {
+      height: 40vh;
+    }
+    // .product_ingredients_list{
+    //   justify-content: space-evenly;
+    // }
   }
 }
 </style>

@@ -1,16 +1,24 @@
 <template>
   <div :class="`rayne-${this.$store.state.theme}`" v-if="hasLoaded">
     <div class="product_card_carousel">
-      <button class="mini_slider_button-prev cursor" @click="previous()">
+      <button
+        class="mini_slider_button-prev cursor"
+        :class="this.$store.state.deviceType === 'desktop' ? '' : 'touchScreen'"
+        @click="previous()"
+      >
         <FontAwesomeIcon :icon="left" />
       </button>
       <div class="mini_slider_scrollplane" @click="onUserClick()">
         <ul
           class="mini_slider_items"
-          :style="{'transform': `translateX(${positionX})`}"
+          :style="{ transform: `translateX(${positionX})` }"
           :class="restart ? 'goback' : ''"
         >
-          <li class="mini_slider_item" v-for="(image, index) in ogImages" :key="index">
+          <li
+            class="mini_slider_item"
+            v-for="(image, index) in ogImages"
+            :key="index"
+          >
             <div class="smart_picture">
               <picture>
                 <img :src="image" class="smart_picture_object" />
@@ -19,7 +27,11 @@
           </li>
         </ul>
       </div>
-      <button class="mini_slider_button-next cursor" @click.prevent="next()">
+      <button
+        class="mini_slider_button-next cursor"
+        :class="this.$store.state.deviceType === 'desktop' ? '' : 'touchScreen'"
+        @click.prevent="next()"
+      >
         <FontAwesomeIcon :icon="right" />
       </button>
       <div class="mini_slider_tracker">
@@ -34,6 +46,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { ref } from '@vue/reactivity'
 import { onMounted } from '@vue/runtime-core'
+import { useStore } from 'vuex'
 export default {
   props: ['images'],
   components: { FontAwesomeIcon },
@@ -46,11 +59,14 @@ export default {
     const hasLoaded = ref(false)
     const first = ogImages[0]
     const last = ogImages[ogLength - 1]
+    const store = useStore()
 
     onMounted(() => {
       ogImages.unshift(last)
       ogImages.push(first)
       hasLoaded.value = true
+
+      console.log('???', store.state)
     })
 
     const nextImage = () => {
@@ -128,8 +144,8 @@ export default {
     height: 3rem;
     background: #fff;
     border: none;
-    border-radius: themed('border-radius');
-    color: themed('secondary-color');
+    border-radius: themed("border-radius");
+    color: themed("secondary-color");
     transition: opacity 0.3s ease-in-out;
   }
   .mini_slider_button-next {
@@ -148,5 +164,14 @@ export default {
   .goback {
     transition: none;
   }
+  .touchScreen {
+    opacity: 1;
+  }
+  // @media screen and (min-width: 768px) {
+  //   .mini_slider_button-next,
+  //   .mini_slider_button-prev {
+  //     opacity: 0;
+  //   }
+  // }
 }
 </style>

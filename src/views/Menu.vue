@@ -55,7 +55,7 @@ export default {
 @include rayne($themes) {
   .paginated_list > .menu_list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-auto-flow: row;
     grid-gap: 2rem;
     background-color: #fff;
@@ -81,6 +81,17 @@ export default {
     float: none;
     width: auto;
     border: none;
+  }
+
+  @media screen and(min-width: 576px) {
+    .paginated_list > .menu_list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and(min-width: 992px) {
+    .paginated_list > .menu_list {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 }
 </style>

@@ -62,6 +62,7 @@ export default {
     max-height: 0;
     padding: 0;
     padding-left: 1.5rem;
+    padding-right: 1.5rem;
     margin-top: 0px;
     margin-bottom: 0px;
     animation: fadeUp;
