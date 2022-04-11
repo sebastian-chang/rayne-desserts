@@ -92,7 +92,6 @@ export default {
 html,
 body {
   height: calc(100vh - 200px);
-  overflow: none;
   margin-left: 0px;
   margin-right: 0px;
 }
@@ -116,34 +115,35 @@ body {
   flex-direction: column;
   flex: 1 1 auto;
 
-  @media screen and (min-width: 576px) {
-    width: inherit;
+  @media screen and (min-width: $SB_Breakpoint_SM) {
+    width: revert;
+    // width: inherit;
     max-width: $SB_Container_SM;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
     // margin-left: auto;
     // margin-right: auto;
   }
-  @media screen and (min-width: 768px) {
-    width: inherit;
+  @media screen and (min-width: $SB_Breakpoint_MD) {
+    width: revert;
     max-width: $SB_Container_MD;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
   }
-  @media screen and (min-width: 992px) {
-    width: inherit;
+  @media screen and (min-width: $SB_Breakpoint_LG) {
+    width: revert;
     max-width: $SB_Container_LG;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
   }
-  @media screen and (min-width: 1200px) {
-    width: inherit;
+  @media screen and (min-width: $SB_Breakpoint_XL) {
+    width: revert;
     max-width: $SB_Container_XL;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
   }
-  @media screen and (min-width: 1400px) {
-    width: inherit;
+  @media screen and (min-width: $SB_Breakpoint_XXL) {
+    width: revert;
     max-width: $SB_Container_XXL;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;

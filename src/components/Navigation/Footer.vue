@@ -81,7 +81,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     box-shadow: inset 0px 0px 200px black;
-    height: 200px;
+    height: fit-content;
 
     font-family: themed("cursive-font");
     font-weight: 400;
@@ -90,7 +90,7 @@ export default {
 
     margin-top: 80px;
     padding-top: 55px;
-    padding-bottom: 55px;
+    padding-bottom: 0;
 
     .footer-header {
       font-size: themed("footer-header-font-size");
@@ -117,11 +117,6 @@ export default {
       font-family: themed("serif-font");
       letter-spacing: 0.5px;
     }
-
-    @media screen and (max-width: 575px) {
-      height: fit-content;
-      padding-bottom: 0px;
-    }
   }
   .footer-main {
     align-items: center;
@@ -131,8 +126,8 @@ export default {
     align-items: flex-start;
   }
   .footer-item {
-    margin-bottom: 30px;
-    width: calc(25% - calc($SB_Gutter_Width / 2));
+    margin-bottom: 40px;
+    width: 100%;
 
     > .cursor {
       transition: color 0.3s ease-in-out;
@@ -140,16 +135,7 @@ export default {
         color: themed("footer-icons-hover");
         --webkit-filter: themed("footer-icons-hover-filter");
         filter: themed("footer-icons-hover-filter");
-
-        // &:after {
-        //   border: themed("footer-border-hover");
-        // }
       }
-    }
-
-    @media screen and (max-width: 575px) {
-      width: 100%;
-      margin-bottom: 40px;
     }
   }
 
@@ -180,6 +166,12 @@ export default {
 
     .footer-copyright-main {
       padding: 5px 0;
+    }
+  }
+
+  @media screen and (min-width: $SB_Breakpoint_LG) {
+    .footer-item {
+      width: calc(25% - calc($SB_Gutter_Width / 2));
     }
   }
 }

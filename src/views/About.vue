@@ -6,7 +6,15 @@
           <p>About us</p>
         </div>
         <div class="main_content">
-          <p>We believe in the power of a thoughtfully crafted brand and the impact it can have on your auience</p>
+          <div class="main_banner">
+            <p>
+              We believe in the power of a thoughtfully crafted brand and the
+              impact it can have on your auience. Lorem ipsum dolor, sit amet
+              consectetur adipisicing elit. Aut ipsam neque voluptates unde
+              tempora, rerum iusto mollitia quos atque impedit. Quo quam magni
+              et eveniet commodi voluptatibus optio ullam tenetur.
+            </p>
+          </div>
         </div>
         <div class="greeting_image">
           <img src="https://picsum.photos/1920/1080?random=48" alt />
@@ -19,15 +27,30 @@
         <div class="description_list">
           <div class="list_item">
             <h3>One</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam mollitia rem quisquam expedita! Nostrum aut neque rem, enim exercitationem deleniti eveniet alias ut corporis error quibusdam quos! Praesentium, architecto. Recusandae!</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+              mollitia rem quisquam expedita! Nostrum aut neque rem, enim
+              exercitationem deleniti eveniet alias ut corporis error quibusdam
+              quos! Praesentium, architecto. Recusandae!
+            </p>
           </div>
           <div class="list_item">
             <h3>Two</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam mollitia rem quisquam expedita! Nostrum aut neque rem, enim exercitationem deleniti eveniet alias ut corporis error quibusdam quos! Praesentium, architecto. Recusandae!</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+              mollitia rem quisquam expedita! Nostrum aut neque rem, enim
+              exercitationem deleniti eveniet alias ut corporis error quibusdam
+              quos! Praesentium, architecto. Recusandae!
+            </p>
           </div>
           <div class="list_item">
             <h3>Three</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam mollitia rem quisquam expedita! Nostrum aut neque rem, enim exercitationem deleniti eveniet alias ut corporis error quibusdam quos! Praesentium, architecto. Recusandae!</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+              mollitia rem quisquam expedita! Nostrum aut neque rem, enim
+              exercitationem deleniti eveniet alias ut corporis error quibusdam
+              quos! Praesentium, architecto. Recusandae!
+            </p>
           </div>
         </div>
       </div>
@@ -36,11 +59,23 @@
           <p>About me</p>
         </div>
         <div class="main_content">
-          <p>We believe in the power of a thoughtfully crafted brand and the impact it can have on your auience</p>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam et reprehenderit dignissimos sint sunt repellendus ab. Iste odit doloremque exercitationem assumenda deleniti, corrupti consequuntur tenetur explicabo fugiat qui necessitatibus nisi.</p>
+          <div class="main_banner">
+            <p>
+              We believe in the power of a thoughtfully crafted brand and the
+              impact it can have on your auience
+            </p>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam et
+              reprehenderit dignissimos sint sunt repellendus ab. Iste odit
+              doloremque exercitationem assumenda deleniti, corrupti
+              consequuntur tenetur explicabo fugiat qui necessitatibus nisi.
+            </p>
+          </div>
         </div>
-        <div class="greeting_image">
-          <img src="https://picsum.photos/420/720?random=28" alt />
+        <div class="other_image">
+          <div class="image_banner">
+            <img src="https://picsum.photos/720/420?random=28" alt />
+          </div>
         </div>
       </div>
     </div>
@@ -50,7 +85,7 @@
 <style lang="scss" scoped>
 @include rayne($themes) {
   .about {
-    font-family: themed('serif-font');
+    font-family: themed("serif-font");
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
@@ -69,7 +104,7 @@
   .description,
   .other {
     pointer-events: auto;
-    font-family: themed('serif-font');
+    font-family: themed("serif-font");
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
@@ -77,30 +112,33 @@
     line-height: 2.3em;
     text-transform: none;
     color: #242424;
-    float: left;
-    width: fit-content;
-    padding: 70px;
-    padding-right: 0;
-    // aspect-ratio: 16/9;
   }
   .greeting {
     display: flex;
+    box-sizing: border-box;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    margin: 20px 0;
+
+    .main_content {
+      box-sizing: border-box;
+      padding-left: 5vw;
+      width: 33%;
+      .main_banner {
+        position: relative;
+        width: 60vw;
+        max-width: 550px;
+        z-index: 99;
+      }
+    }
 
     .greeting_image {
-      position: relative;
+      width: 66%;
       aspect-ratio: 16/9;
-      // z-index: 23;
-      // height: 420px;
-      // width: 720px;
 
       img {
-        // position: absolute;
-        // left: 0;
-        // top: 0;
-        width: 100%;
+        max-width: 100%;
         height: auto;
       }
     }
@@ -111,33 +149,63 @@
     justify-content: space-evenly;
     align-items: center;
     padding-left: 0;
+    margin-top: 30px;
 
     .description_list {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
       align-items: center;
       padding-left: 2rem;
       padding-right: 2rem;
 
       .list_item {
         text-align: center;
-        box-sizing: border-box;
-        padding-left: 3rem;
-        padding-right: 3rem;
         padding-bottom: 3rem;
-        width: calc(100% / 5);
       }
     }
   }
   .other {
     display: flex;
+    flex-direction: row;
     flex-direction: row-reverse;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
+    margin: 20px 0;
+
+    .main_content {
+      box-sizing: border-box;
+      .main_banner {
+        position: relative;
+        width: 60vw;
+        max-width: 550px;
+        p {
+          text-align: center;
+          padding-right: 5vw;
+        }
+      }
+    }
+
+    .other_image {
+      position: relative;
+      aspect-ratio: 16/9;
+      box-sizing: border-box;
+      width: 33%;
+
+      .image_banner {
+        position: relative;
+        width: 60vw;
+        max-width: 550px;
+        z-index: -1;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
   }
   .sideways {
-    font-family: themed('serif-font');
+    font-family: themed("serif-font");
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
@@ -145,17 +213,13 @@
     line-height: 2.3em;
     text-transform: none;
     color: #242424;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0;
     box-sizing: border-box;
     order: -1;
     justify-self: flex-start;
     transform: translate(-50%, -50%) rotate(270deg);
 
     p {
-      font-family: themed('serif-font');
+      font-family: themed("serif-font");
       font-weight: 300;
       font-style: normal;
       font-size: 14px;
@@ -165,49 +229,55 @@
       margin-top: 0;
       margin-bottom: 0;
       text-align: center;
-      padding: 10px;
+      width: 100px;
+      position: absolute;
+      top: -40px;
+      left: -50px;
     }
   }
   .rev {
-    order: 2;
+    order: 1;
+    z-index: 99;
   }
-  .main_content {
-    font-family: themed('serif-font');
-    font-weight: 300;
-    font-style: normal;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    line-height: 2.3em;
-    text-transform: none;
-    color: #242424;
-    align-items: center;
-    box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30vw;
 
-    p {
-      font-family: themed('serif-font');
-      font-weight: 300;
-      font-style: normal;
-      font-size: 38px;
-      letter-spacing: 0.04em;
-      line-height: 1.5em;
-      text-transform: none;
-      color: #242424;
-      position: relative;
-      height: auto;
-      padding-bottom: 16px;
-      clear: none;
-      padding-left: 16px;
-      padding-right: 16px;
-      padding-top: 16px;
-      width: 60vw;
-      max-width: 550px;
-      z-index: 99;
-      margin-top: 0;
-      margin-bottom: 0;
-      white-space: pre-wrap;
+  @media screen and (min-width: $SB_Breakpoint_SM) {
+    .other {
+      .main_content {
+        .main_banner {
+          p {
+            text-align: right;
+            padding-right: 10vw;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: $SB_Breakpoint_MD) {
+    .description {
+      .description_list {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+    .other {
+      justify-content: space-evenly;
+      .main_content {
+        .main_banner {
+          p {
+            padding-right: 5vw;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: $SB_Breakpoint_LG) {
+    .other {
+      .main_content {
+        .main_banner {
+          p {
+            padding-right: 0;
+          }
+        }
+      }
     }
   }
 }
