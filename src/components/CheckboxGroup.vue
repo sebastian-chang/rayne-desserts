@@ -62,13 +62,14 @@ export default {
       font-weight: 400;
       // border-bottom: 1px solid $dark_purple;
       width: fit-content;
-      margin-bottom: 36px;
+      margin-bottom: 24px;
+      // margin-bottom: 36px;
     }
     .checkbox_group {
       list-style: none;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 30px;
 
       .checkbox {
         -webkit-appearance: none;
@@ -167,7 +168,14 @@ export default {
       font-size: $SB_Small_Font_Size;
       font-weight: 700;
       padding-top: 20px;
+      padding-bottom: 20px;
       width: 75%;
+    }
+  }
+  @media screen and(min-width: $SB_Breakpoint_SM) {
+    .checkbox_group {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
   }
 }

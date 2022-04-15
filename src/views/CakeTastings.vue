@@ -4,7 +4,7 @@
       <!-- Cake Design -->
       <div class="cake_design container">
         <div class="cake_description">
-          <h1 class="tasting_title">Cake Design</h1>
+          <h1 class="tasting_title first_title">Cake Design</h1>
           <div>
             <p>
               We take great pride in designing your cake for your special day.
@@ -120,13 +120,14 @@
             :required="true"
           />
           <Input
-            class="contact-form-input"
+            class="tasting_form_input"
             label="Email"
             name="email"
             v-model="tastingMessage.email"
             :type="'email'"
             :required="true"
           />
+          <!-- <div class="test" v-if="this.$store.state.windowType === 'lg'"></div> -->
           <Input
             class="tasting_form_input"
             label="Name of Venue"
@@ -143,54 +144,61 @@
             :type="'number'"
             :required="true"
           />
-          <Datepicker
-            class="tasting_form_date tasting_form_input"
-            v-model="tastingMessage.date"
-            :clearButton="true"
-            inputFormat="MMM dd, yyyy"
-            :weekStartsOn="0"
-            :style="dateStyles"
-            placeholder="Type or select date"
-          />
-          <div></div>
-          <CheckboxGroup
+          <!-- <div class="test" v-if="this.$store.state.windowType === 'md'"></div> -->
+          <div class="tasting_form_input">
+            <Datepicker
+              class="tasting_form_date tasting_form_input"
+              v-model="tastingMessage.date"
+              :clearButton="true"
+              inputFormat="MMM dd, yyyy"
+              :weekStartsOn="0"
+              :style="dateStyles"
+              placeholder="Type or select date"
+            />
+          </div>
+          <div class="test" v-if="this.$store.state.windowType === 'lg'"></div>
+          <!-- <div :class="this.$store.state.windowType === 'lg' ? '':'tasting_form_checkboxes'"> -->
+          <div class="tasting_form_checkboxes">
+            <CheckboxGroup
             class="tasting_form_input"
-            label="Cake Flavors"
-            name="flavors"
-            v-model="tastingMessage.flavors"
-            :items="cakes"
-            :maxPicks="3"
-            :required="true"
-          />
-          <CheckboxGroup
+              label="Cake Flavors"
+              name="flavors"
+              v-model="tastingMessage.flavors"
+              :items="cakes"
+              :maxPicks="3"
+              :required="true"
+            />
+            <CheckboxGroup
             class="tasting_form_input"
-            label="Icings"
-            name="icings"
-            v-model="tastingMessage.icings"
-            :items="icings"
-            :maxPicks="2"
-            :required="true"
-          />
-          <CheckboxGroup
+              label="Icings"
+              name="icings"
+              v-model="tastingMessage.icings"
+              :items="icings"
+              :maxPicks="2"
+              :required="true"
+            />
+            <CheckboxGroup
             class="tasting_form_input"
-            label="Cake Fillings"
-            name="fillings"
-            v-model="tastingMessage.fillings"
-            :items="fillings"
-            :maxPicks="2"
-            :required="true"
-          />
-          <CheckboxGroup
-            v-model="tastingMessage.misc"
-            :items="otherItems"
-            label="Misc Items"
-            name="misc"
-          />
+              label="Cake Fillings"
+              name="fillings"
+              v-model="tastingMessage.fillings"
+              :items="fillings"
+              :maxPicks="2"
+              :required="true"
+            />
+            <CheckboxGroup
+            class="tasting_form_input"
+              v-model="tastingMessage.misc"
+              :items="otherItems"
+              label="Misc Items"
+              name="misc"
+            />
+          </div>
           <Switch
             label="Cake Delivery"
             name="delivery"
             v-model="tastingMessage.delivery"
-            class="tasting_delivery tasting_form_input"
+            class="tasting_delivery"
             :required="false"
           />
           <Button
@@ -354,59 +362,60 @@ export default {
   .cake_sizes,
   .cake_delivery {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
-    // align-items: center;
-    height: 60vh;
     margin-top: 40px;
-    margin-bottom: 20px;
-    padding: 20px 40px;
   }
-  .cake_tasting,
-  .cake_delivery {
-    flex-direction: row-reverse;
+  .cake_design {
+    margin-top: 0;
   }
   .right {
     justify-content: center !important;
     text-align: right;
   }
   .cake_tasting_form_section {
-    // width: 70%;
     margin: 0 auto;
     margin-top: 0px;
     padding: 15px;
     p {
       margin-bottom: 40px;
     }
+    .tasting_title {
+      margin-top: 64px;
+    }
   }
   .tasting_form {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 50px;
   }
+  .tasting_form_input,
+  .tasting_form_date,
+  .tasting_form_checkboxes {
+    grid-column: 1;
+  }
   #tasting_submit_button {
-    grid-column: 2/3;
+    grid-column: 1;
     margin-top: 40px;
-    // padding-top: 40px;
+    margin-left: 20px;
   }
   .tasting_title {
     font-family: themed("cursive-font");
-    // color: themed("main-color");
+    margin-top: 48px;
   }
-  .tasting_delivery {
-    padding-top: 60px;
+  .first_title {
+    margin-top: 0px;
   }
   .cake_description {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    max-width: 30vw;
-    padding: 0 40px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .cake_image {
     position: relative;
+    margin-top: 40px;
 
     img {
       box-sizing: border-box;
@@ -414,6 +423,93 @@ export default {
       max-width: 100%;
       width: auto;
       height: 100%;
+    }
+  }
+  .test {
+    width: 100%;
+  }
+
+  @media screen and (min-width: $SB_Breakpoint_SM) {
+    .tasting_form {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px 0;
+    }
+    .tasting_form_input,
+    .tasting_form_date,
+    .tasting_form_checkboxes {
+      grid-column: 1/4;
+    }
+    #tasting_submit_button {
+      grid-column: 2/3;
+    }
+    .tasting_delivery {
+      grid-column: 1/4;
+      margin-top: 30px;
+    }
+  }
+
+  @media screen and(min-width: $SB_Breakpoint_MD) {
+    .tasting_form_input,
+    .tasting_form_date,
+    .tasting_form_checkboxes {
+      grid-column: inherit;
+      margin: 0 auto;
+    }
+    .tasting_form_checkboxes {
+      grid-column: 1/4;
+      margin: 0;
+    }
+  }
+  @media screen and(min-width: $SB_Breakpoint_LG) {
+    .cake_design,
+    .cake_tasting,
+    .cake_sizes,
+    .cake_delivery {
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      height: 60vh;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding: 20px 40px;
+    }
+    .cake_tasting,
+    .cake_delivery {
+      flex-direction: row-reverse;
+    }
+    .cake_description {
+      margin-top: 0;
+      padding: 0 20px;
+    }
+    .cake_image {
+      img {
+        max-height: 100%;
+        max-width: 400px;
+        width: auto;
+        height: 100%;
+      }
+    }
+    .cake_tasting_form_section{
+      width: 85vw;
+    }
+    .tasting_form_input,
+    .tasting_form_date,
+    .tasting_form_checkboxes {
+      margin: 0 10px;
+    }
+    .tasting_form_checkboxes {
+      margin: 0;
+      margin-top: 20px;
+      grid-column: 1/4;
+      display: grid;
+      grid-template-columns: 1fr 1fr ;
+      grid-gap: 30px;
+      .tasting_form_input{
+        grid-column: unset;
+      }
+    }
+    .tasting_delivery{
+      margin-left: 15px;
     }
   }
 }

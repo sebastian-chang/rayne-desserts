@@ -192,26 +192,20 @@ export default {
       margin-top: 30px;
     }
   }
-  @media screen and (min-width: 576px) {
-    // .layout-cards-block{
-    //   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    //   padding-left: 10px;
-    // }
-
+  @media screen and (min-width: $SB_Breakpoint_SM) {
     .contact-form-input {
       margin: 0 80px;
     }
     #contact-form-message {
       margin: 0 80px;
-      // max-width: 210px;
     }
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: $SB_Breakpoint_MD) {
     .layout-cards-block {
       grid-gap: 0;
     }
   }
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: $SB_Breakpoint_LG) {
     .layout-cards-block {
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       grid-gap: 30px;
@@ -223,14 +217,12 @@ export default {
       padding: 15px;
     }
     .contact-form {
-      // display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 30px;
 
       .contact-form-input {
         grid-column: inherit;
         margin: 0 auto;
-        // width: 100%;
       }
       #contact-form-message {
         grid-column: 1/4;
@@ -243,7 +235,7 @@ export default {
       }
     }
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: $SB_Breakpoint_XL) {
     .layout-cards-block {
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       grid-gap: 30px;
@@ -251,23 +243,6 @@ export default {
     .contact-form-input{
       width: 100%;
     }
-    // .contact-form-section {
-    //   width: 70%;
-    //   margin: 0 auto;
-    //   margin-top: 35px;
-    //   padding: 15px;
-    // }
-    // .contact-form {
-    //   margin-top: 40px;
-    //   gap: 30px 0px;
-    // }
-    // .contact-form-section {
-    //   width: 100%;
-    //   text-align: center;
-    // }
-    // .contact-cards {
-    //   width: 100%;
-    // }
   }
 }
 </style>
