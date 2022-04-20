@@ -1,4 +1,4 @@
-# rayne-desserts
+# Rayne Desserts
 
 ## Project setup
 ```
