@@ -1,5 +1,8 @@
 <template>
-  <Navbar />
+  <!-- <Navbar />
+  <MobileNavbar v-if="false"/> -->
+  <Navbar v-if="this.$store.state.windowWidth >= 992 && this.$store.state.deviceType === 'desktop'" />
+  <MobileNavbar v-else />
   <div class="content">
     <router-view />
   </div>
@@ -13,12 +16,17 @@
 
 <script>
 import Navbar from './components/Navigation/Navbar'
+import MobileNavbar from './components/Navigation/MobileNavbar.vue'
 import Footer from './components/Navigation/Footer.vue'
 import { computed, ref } from '@vue/reactivity'
 import { onMounted, onUnmounted } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 export default {
-  components: { Navbar, Footer },
+  components: {
+    Navbar,
+    MobileNavbar,
+    Footer,
+  },
   setup () {
     const store = useStore()
     let windowWidth = ref(window.innerWidth)
@@ -118,33 +126,36 @@ body {
   @media screen and (min-width: $SB_Breakpoint_SM) {
     width: revert;
     // width: inherit;
-    max-width: $SB_Container_SM;
+    // max-width: $SB_Container_SM;
+    max-width: 100%;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
-    // margin-left: auto;
-    // margin-right: auto;
   }
   @media screen and (min-width: $SB_Breakpoint_MD) {
     width: revert;
-    max-width: $SB_Container_MD;
+    // min-width: $SB_Container_MD;
+    max-width: 100%;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
   }
   @media screen and (min-width: $SB_Breakpoint_LG) {
     width: revert;
-    max-width: $SB_Container_LG;
+    // width: $SB_Container_LG;
+    max-width: 100%;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
   }
   @media screen and (min-width: $SB_Breakpoint_XL) {
     width: revert;
-    max-width: $SB_Container_XL;
+    // max-width: $SB_Container_XL;
+    max-width: 100%;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
   }
   @media screen and (min-width: $SB_Breakpoint_XXL) {
     width: revert;
-    max-width: $SB_Container_XXL;
+    // max-width: $SB_Container_XXL;
+    max-width: 100%;
     padding-left: $SB_Gutter_Width;
     padding-right: $SB_Gutter_Width;
   }

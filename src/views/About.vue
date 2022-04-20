@@ -129,7 +129,7 @@
         position: relative;
         width: 60vw;
         max-width: 550px;
-        z-index: 99;
+        z-index: 5;
       }
     }
 

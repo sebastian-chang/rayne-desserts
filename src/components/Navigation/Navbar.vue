@@ -106,30 +106,45 @@ export default {
     margin: 40px auto;
     margin-bottom: 60px;
     border-radius: themed("border-radius");
-    top: 0px;
+    outline: themed("navbar-nav-border");
+    outline-offset: -10px;
+    // top: 0px;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
   }
   nav {
     display: flex;
     align-items: center;
-    border: themed("navbar-nav-border");
-    margin: 0;
+    justify-content: space-between;
+    // border: themed("navbar-nav-border");
+    border-radius: themed("border-radius");
+    margin: 0 auto;
     padding: 10px;
+    height: 20px;
+    max-height: 25px;
     // width: 700px;
     // padding-top: 10px;
     // padding-bottom: 10px;
+  }
+  .logo_link{
+    z-index: 30;
+    margin-left: -80px;
+    margin-right: 80px;
   }
   .logo {
     display: block;
     max-height: 100px;
     border-radius: 50%;
     overflow: hidden;
-    position: absolute;
+    // margin-right: 50px;
+    // position: absolute;
+    // max-height: 80px;
     // margin-top: -6px;
     // margin-left: 20px;
-    z-index: 1;
     // top: -30px;
-    top: 25px;
-    left: 200px;
+    // top: 25px;
+    // left: 200px;
     // right: 300px;
   }
   nav h1 {
@@ -138,7 +153,7 @@ export default {
   nav .links {
     // display: flex;
     position: relative;
-    margin: auto;
+    // margin: auto;
     padding-left: 0;
   }
   nav .links a {

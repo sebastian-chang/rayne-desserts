@@ -122,7 +122,7 @@ export default {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-start;
   }
   .footer-item {
@@ -172,6 +172,20 @@ export default {
   @media screen and (min-width: $SB_Breakpoint_LG) {
     .footer-item {
       width: calc(25% - calc($SB_Gutter_Width / 2));
+    }
+    .footer-item:first-of-type{
+      margin-left: auto;
+    }
+  }
+  @media screen and (min-width: $SB_Breakpoint_XXL) {
+    .footer-main{
+      margin: 0 50px;
+    }
+    .footer-item {
+      width: calc(25% - calc($SB_Gutter_Width));
+    }
+    .footer-item:first-of-type{
+      margin-left: auto;
     }
   }
 }

@@ -6,6 +6,7 @@ export default createStore({
     windowWidth: window.innerWidth,
     windowType: '',
     deviceType: '',
+    showMobileNav: false,
   },
   mutations: {
     THEME_CHANGE (state, theme) {
@@ -23,6 +24,9 @@ export default createStore({
       console.log('###UPDATE DEVICE TYPE')
       state.deviceType = type
     },
+    SET_MOBILE_NAV_VIEW (state, type) {
+      state.showMobileNav = type
+    }
   },
   actions: {
     themeChange ({ commit }, theme) {
@@ -36,6 +40,9 @@ export default createStore({
     },
     deviceTypeChange ({ commit }, type) {
       commit('SET_DEVICE_TYPE', type)
+    },
+    showMobileNavChange ({ commit }, type) {
+      commit('SET_MOBILE_NAV_VIEW', type)
     }
   },
   modules: {},
@@ -51,6 +58,9 @@ export default createStore({
     },
     deviceType (state) {
       return state.deviceType
+    },
+    showMobileNav (state) {
+      return state.showMobileNav
     },
   }
 });
