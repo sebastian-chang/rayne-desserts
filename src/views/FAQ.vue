@@ -22,6 +22,7 @@
 
 <script>
 import { ref, onMounted, reactive } from 'vue'
+import { projectFirestore } from '../firebase/config'
 import Accordion from '../components/Accordion.vue'
 export default {
   components: { Accordion },
@@ -33,9 +34,14 @@ export default {
     })
 
     onMounted(async () => {
-      const res = await fetch(`${process.env.VUE_APP_BASE_API}/faq`)
-      const data = await res.json()
-      faqData.categories = data
+      // const res = await getDocs(collection(db, 'test-faq'))
+      const res = await projectFirestore.collection('test-faq').get()
+      faqData.categories = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+      // const res = await fetch(`${process.env.VUE_APP_BASE_API}/faq`)
+      // const data = await res.json()
+      // faqData.categories = data
       isLoading.value = false
     })
 
@@ -61,8 +67,8 @@ export default {
     padding-right: 6.4vw;
   }
   .faq-main-title {
-    font-family: themed('serif-font');
-    font-size: themed('faq-title-font-size');
+    font-family: themed("serif-font");
+    font-size: themed("faq-title-font-size");
     font-weight: 700;
     line-height: 1.05;
     text-transform: uppercase;
