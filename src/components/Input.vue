@@ -18,15 +18,14 @@
         :required="required"
       />
       <!-- Password input -->
-      <!-- <div class="group" v-if="type === 'password'">
-    <input
-      type="password"
-      id="{name}"
-      :placeholder="name"
-      v-model="inputText"
-      autocomplete="off"
-      required="{required}"
-      />-->
+      <Password
+        v-if="type === 'password'"
+        :name="name"
+        :label="label"
+        v-model="inputText"
+        autocomplete="off"
+        :required="required"
+      />
       <!-- Email input -->
       <Email
         v-if="type === 'email'"
@@ -62,6 +61,7 @@ import Phone from './Inputs/Phone.vue'
 import Email from './Inputs/Email.vue'
 import Number from './Inputs/Number.vue'
 import Message from './Inputs/TextArea.vue'
+import Password from './Inputs/Password.vue'
 
 export default {
   components: {
@@ -69,7 +69,8 @@ export default {
     Phone,
     Email,
     Number,
-    Message
+    Message,
+    Password,
   },
   props: ['type', 'name', 'required', 'modelValue', 'label'],
   setup (props, { emit }) {

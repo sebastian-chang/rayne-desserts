@@ -227,6 +227,7 @@ import Switch from '../components/Switch.vue'
 import useFormValidation from '../modules/userFormValidation.js'
 import useSubmitButtonState from '../modules/useSubmitButtonState.js'
 import emailjs from '@emailjs/browser'
+import { projectFirestore } from '../firebase/config'
 
 export default {
   components: {
@@ -288,8 +289,12 @@ export default {
 
     onMounted(async () => {
       store.dispatch('themeChange', 'weddings')
-      const res = await fetch(`${process.env.VUE_APP_BASE_API}/flavors`)
-      const data = await res.json()
+      const res = await projectFirestore.collection('flavors').get()
+      const data = res.docs.map( doc => {
+        return { ...doc.data(), id: doc.id}
+      })
+      // const res = await fetch(`${process.env.VUE_APP_BASE_API}/flavors`)
+      // const data = await res.json()
       cakes.value = data.filter(item => item.type === 'cake')
       icings.value = data.filter(item => item.type === 'icing')
       fillings.value = data.filter(item => item.type === 'filling')

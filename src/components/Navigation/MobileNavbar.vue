@@ -33,6 +33,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars, } from '@fortawesome/free-solid-svg-icons'
 import { faWindowClose, } from '@fortawesome/free-regular-svg-icons'
 import MobileNavbarContent from './MobileNavbarContent.vue'
+import { projectFirestore } from '../../firebase/config'
 export default {
   components: { FontAwesomeIcon, MobileNavbarContent },
   setup () {
@@ -43,8 +44,10 @@ export default {
     const routeSelected = ref('')
 
     onMounted(async () => {
-      const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu`)
-      const data = await res.json()
+      const res = await projectFirestore.collection('menu').get()
+      const data = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id}
+      })
       menuItems.value = await data
       hasLoaded.value = await true
     })

@@ -67,6 +67,7 @@
 <script>
 import { onMounted, ref } from '@vue/runtime-core'
 import { useRouter } from 'vue-router'
+import { projectFirestore } from '../../firebase/config'
 export default {
   setup () {
     const menuItems = ref([])
@@ -77,8 +78,10 @@ export default {
     const routeSelected = ref('')
 
     onMounted(async () => {
-      const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu`)
-      const data = await res.json()
+      const res = await projectFirestore.collection('menu').get()
+      const data = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id}
+      })
       menuItems.value = await data
       hasLoaded.value = await true
     })

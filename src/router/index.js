@@ -11,6 +11,9 @@ import FAQ from '../views/FAQ.vue'
 import Product from '../views/Product.vue'
 import CakeTastings from '../views/CakeTastings.vue'
 
+import AdminSections from '../views/Admin/sections.vue'
+import AdminLogin from '../views/Admin/Login.vue'
+
 const routes = [
   {
     path: "/",
@@ -120,6 +123,17 @@ const routes = [
     beforeEnter () { window.open(process.env.VUE_APP_GOOGLE_LOCATION, '_blank') },
     component: Contact,
   },
+  // ADMIN
+  {
+    path: '/admin/login',
+    name: 'Admin-Login',
+    component:AdminLogin,
+  },
+  {
+    path: '/admin/sections',
+    name: 'Admin-Sections',
+    component: AdminSections
+  }
 ];
 
 const router = createRouter({
