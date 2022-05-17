@@ -34,14 +34,10 @@ export default {
     })
 
     onMounted(async () => {
-      // const res = await getDocs(collection(db, 'test-faq'))
-      const res = await projectFirestore.collection('test-faq').get()
+      const res = await projectFirestore.collection('faq').get()
       faqData.categories = res.docs.map(doc => {
         return { ...doc.data(), id: doc.id }
       })
-      // const res = await fetch(`${process.env.VUE_APP_BASE_API}/faq`)
-      // const data = await res.json()
-      // faqData.categories = data
       isLoading.value = false
     })
 

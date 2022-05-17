@@ -48,6 +48,7 @@
 import { useRouter } from 'vue-router'
 import { onMounted, ref } from '@vue/runtime-core'
 import { useStore } from 'vuex'
+import { projectFirestore } from '../../firebase/config'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 export default {
   setup () {
@@ -60,8 +61,10 @@ export default {
     const activeTab = ref(false)
 
     onMounted(async () => {
-      const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu`)
-      const data = await res.json()
+      const res = await projectFirestore.collection('menu').get()
+      const data = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id}
+      })
       menuItems.value = await data
       hasLoaded.value = await true
     })

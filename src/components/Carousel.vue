@@ -46,7 +46,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { ref } from '@vue/reactivity'
 import { onMounted } from '@vue/runtime-core'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 export default {
   props: ['images'],
   components: { FontAwesomeIcon },
@@ -59,14 +59,12 @@ export default {
     const hasLoaded = ref(false)
     const first = ogImages[0]
     const last = ogImages[ogLength - 1]
-    const store = useStore()
+    // const store = useStore()
 
     onMounted(() => {
       ogImages.unshift(last)
       ogImages.push(first)
       hasLoaded.value = true
-
-      console.log('???', store.state)
     })
 
     const nextImage = () => {

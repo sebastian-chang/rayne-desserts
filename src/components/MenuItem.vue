@@ -39,7 +39,6 @@ export default {
     const favorite = ref(false)
     const router = useRouter()
     const store = useStore()
-
     const showDesc = computed(() => {
       if(store.getters.windowWidth >= 768){
         return true
@@ -51,7 +50,6 @@ export default {
       favorite.value = !favorite.value
     }
     const onUserClick = () => {
-      console.log('PROPS', typeof (props.item.id), typeof (props.cat))
       router.push({ name: 'Product', params: { slug: `${props.cat}-${props.item.name}-${props.item.id}` } })
     }
     return { heart: farHeart, liked: fasHeart, favorite, addFavorite, onUserClick, showDesc }

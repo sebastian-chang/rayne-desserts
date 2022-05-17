@@ -20,4 +20,27 @@ const timestamp = firebase.firestore.FieldValue.serverTimestamp
 const projectAuth = firebase.auth()
 const googleSignInAuth = firebase.auth.GoogleAuthProvider.PROVIDER_ID
 
-export { projectFirestore, timestamp, projectAuth, googleSignInAuth }
+// Firestore functions
+const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = projectFirestore.collection(collectionKey)
+  const batch = projectFirestore.batch()
+  objectsToAdd.items.forEach(obj => {
+    collectionRef.add(obj)
+    // const docRef = projectFirestore.collection(collectionRef).add(obj)
+    // console.log('>>>DOC REF', docRef)
+    // batch.set(docRef, obj)
+    // Make me a new document object
+    // const newDocRef = collectionRef.doc()
+    // batch.set(newDocRef, obj)
+  })
+
+  await batch.commit()
+}
+
+export {
+  projectFirestore,
+  timestamp,
+  projectAuth,
+  googleSignInAuth,
+  addCollectionAndDocuments
+}

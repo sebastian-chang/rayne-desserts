@@ -77,6 +77,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as fasHeart, faBreadSlice, faCheese, faSeedling } from '@fortawesome/free-solid-svg-icons'
 import { faNutritionix } from '@fortawesome/free-brands-svg-icons'
+import { projectFirestore } from '../firebase/config'
 export default {
   props: ['slug'],
   components: { FontAwesomeIcon },
@@ -87,10 +88,13 @@ export default {
     const isLoading = ref(true)
 
     onMounted(async () => {
-      console.log('PRODUCT', props)
       const splitProps = props.slug.split('-')
-      const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu?category=${splitProps[0]}`)
-      const data = await res.json()
+      const res = await projectFirestore.collection('menu').where('category', '==', splitProps[0]).get()
+      const data = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+      // const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu?category=${splitProps[0]}`)
+      // const data = await res.json()
       state.product = data[0].items.filter(item => item.id == splitProps[2])[0]
       isLoading.value = false
     })
@@ -127,7 +131,6 @@ export default {
   }
   .product_images {
     grid-column: auto / span 2;
-    // background: olive;
     // display: block;
     // width: 66.667%;
 
@@ -146,6 +149,7 @@ export default {
       position: relative;
       display: block;
       // height: 40vh;
+      // min-height: 200px;
     }
     .odd:first-child,
     .even:first-child,
@@ -162,7 +166,6 @@ export default {
     max-height: 100%;
     width: 100%;
     border-radius: themed("border-radius");
-    // background: purple;
   }
   .product_image_list .product_image_item:first-child .product_image {
     object-fit: cover;
@@ -171,7 +174,6 @@ export default {
     max-width: 100%;
     max-height: 100%;
     width: 100%;
-    // background: wheat;
   }
   .product_image_list .product_image_item:last-child .product_image {
     // object-fit: cover;
@@ -186,7 +188,6 @@ export default {
   .product_details {
     padding: 48px 35px;
     grid-column: auto / span 1;
-    // background: palevioletred;
     font-family: $SB_Main_Font;
     // width: 33%;
 
@@ -248,7 +249,6 @@ export default {
       // padding-bottom: 48px;
       // margin-left: 0;
       padding-left: 0;
-      // background: paleturquoise;
 
       .product_ingredients_item {
         margin-left: 1rem;
@@ -283,19 +283,17 @@ export default {
         .pricing_label {
           display: block;
           float: left;
-          // color: orange;
           margin-left: 20px;
         }
         .pricing_price {
           display: block;
           float: right;
-          // color: paleturquoise;
           margin-right: 20px;
         }
       }
     }
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: $SB_Breakpoint_MD) {
     .product_main {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -305,20 +303,18 @@ export default {
       display: block;
       // height: 40vh;
     }
-    .product_ingredients_list{
+    .product_ingredients_list {
       justify-content: space-evenly;
     }
   }
-  @media screen and (min-width: 1200px) {
-    // .product_main {
-    //   grid-template-columns: repeat(3, 1fr);
-    // }
-    .product_image_item {
-      height: 40vh;
+  @media screen and (min-width: $SB_Breakpoint_XL) {
+    .product_images {
+      .odd:first-child,
+      .even:first-child,
+      .even:last-child {
+        min-height: 520px;
+      }
     }
-    // .product_ingredients_list{
-    //   justify-content: space-evenly;
-    // }
   }
 }
 </style>

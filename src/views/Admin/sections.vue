@@ -5,7 +5,18 @@
 </template>
 
 <script>
+import {onMounted} from 'vue'
+// import { addCollectionAndDocuments} from '../../firebase/config'
+import { STORE_DATA } from '../../../mock/store-data'
 export default {
+  setup() {
+    onMounted(async () => {
+      console.log('>>>MOUNTED FLAVORS', STORE_DATA[0])
+      // await addCollectionAndDocuments('flavors', STORE_DATA[0])
+      // await addCollectionAndDocuments('menu', STORE_DATA[3])
+      // await addCollectionAndDocuments('faq', STORE_DATA[2])
+    })
+  }
 
 }
 </script>

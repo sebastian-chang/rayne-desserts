@@ -20,6 +20,7 @@
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onMounted, } from '@vue/runtime-core'
 import MenuItem from '../components/MenuItem.vue'
+import { projectFirestore } from '../firebase/config'
 export default {
   components: { MenuItem },
   props: ['cat'],
@@ -30,9 +31,10 @@ export default {
     const isLoading = ref(true)
 
     onMounted(async () => {
-      const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu`)
-      const data = await res.json()
-      state.menu = data
+      const res = await projectFirestore.collection('menu').get()
+      state.menu = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
       isLoading.value = false
     })
 
@@ -45,7 +47,6 @@ export default {
       }
     }
     )
-
     return { state, isLoading, filtered }
   }
 }
