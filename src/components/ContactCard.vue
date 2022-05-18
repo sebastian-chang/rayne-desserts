@@ -22,6 +22,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPhoneAlt, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { onMounted, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { envConfig } from '../firebase/config'
 export default {
   components: { FontAwesomeIcon },
   props: ['cardStyle'],
@@ -45,14 +46,14 @@ export default {
         Object.assign(card, {
           icon: faPhoneAlt,
           label: 'Phone',
-          text: process.env.VUE_APP_PHONE
+          text: envConfig.VUE_APP_PHONE
         })
       }
       else if (style.cardStyle === 'email') {
         Object.assign(card, {
           icon: faEnvelope,
           label: 'Email',
-          text: process.env.VUE_APP_EMAIL
+          text: envConfig.VUE_APP_EMAIL
         })
       }
     })

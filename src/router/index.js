@@ -13,6 +13,7 @@ import CakeTastings from '../views/CakeTastings.vue'
 
 import AdminSections from '../views/Admin/sections.vue'
 import AdminLogin from '../views/Admin/Login.vue'
+import { envConfig } from "../firebase/config";
 
 const routes = [
   {
@@ -108,19 +109,19 @@ const routes = [
   {
     path: "/phone",
     name: "Phone",
-    beforeEnter () { location.href = ('tel:' + process.env.VUE_APP_PHONE) },
+    beforeEnter () { location.href = ('tel:' + envConfig.VUE_APP_PHONE) },
     component: Contact,
   },
   {
     path: "/email",
     name: "Email",
-    beforeEnter () { location.href = ('mailTo:' + process.env.VUE_APP_EMAIL) },
+    beforeEnter () { location.href = ('mailTo:' + envConfig.VUE_APP_EMAIL) },
     component: Contact,
   },
   {
     path: "/address",
     name: "Address",
-    beforeEnter () { window.open(process.env.VUE_APP_GOOGLE_LOCATION, '_blank') },
+    beforeEnter () { window.open(envConfig.VUE_APP_GOOGLE_LOCATION, '_blank') },
     component: Contact,
   },
   // ADMIN

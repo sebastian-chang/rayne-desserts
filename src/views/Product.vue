@@ -93,8 +93,6 @@ export default {
       const data = res.docs.map(doc => {
         return { ...doc.data(), id: doc.id }
       })
-      // const res = await fetch(`${process.env.VUE_APP_BASE_API}/menu?category=${splitProps[0]}`)
-      // const data = await res.json()
       state.product = data[0].items.filter(item => item.id == splitProps[2])[0]
       isLoading.value = false
     })

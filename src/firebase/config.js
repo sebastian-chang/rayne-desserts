@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
+import 'firebase/compat/functions'
 
 const firebaseConfig = {
   apiKey: "AIzaSyACNzoWUMQ4jkNG9XV-Ug_1Or9qmm-QgK4",
@@ -8,7 +9,14 @@ const firebaseConfig = {
   projectId: "rayne-desserts",
   storageBucket: "rayne-desserts.appspot.com",
   messagingSenderId: "195718620630",
-  appId: "1:195718620630:web:5bfc86b2dfd5bbd3acf077"
+  appId: "1:195718620630:web:5bfc86b2dfd5bbd3acf077",
+  VUE_APP_GOOGLE_LOCATION: process.env.VUE_APP_GOOGLE_LOCATION,
+  VUE_APP_EMAIL: process.env.VUE_APP_EMAIL,
+  VUE_APP_PHONE: process.env.VUE_APP_PHONE,
+  VUE_APP_EMAILJS_SERVICE_ID: process.env.VUE_APP_EMAILJS_SERVICE_ID,
+  VUE_APP_EMAILJS_CONTACT_TEMPLATE_ID: process.env.VUE_APP_EMAILJS_CONTACT_TEMPLATE_ID,
+  VUE_APP_EMAILJS_TASTING_TEMPLATE_ID: process.env.VUE_APP_EMAILJS_TASTING_TEMPLATE_ID,
+  VUE_APP_EMAILJS_USER_ID: process.env.VUE_APP_EMAILJS_USER_ID,
 };
 
 // Initialize Firebase
@@ -37,10 +45,13 @@ const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
   await batch.commit()
 }
 
+const envConfig = firebase.functions().app.options
+
 export {
   projectFirestore,
   timestamp,
   projectAuth,
   googleSignInAuth,
-  addCollectionAndDocuments
+  addCollectionAndDocuments,
+  envConfig
 }

@@ -75,6 +75,7 @@ import emailjs from '@emailjs/browser'
 
 import useFormValidation from '../modules/userFormValidation.js'
 import useSubmitButtonState from '../modules/useSubmitButtonState.js'
+import { envConfig } from '../firebase/config'
 
 export default {
   components: {
@@ -91,6 +92,7 @@ export default {
     })
     const router = useRouter()
 
+    console.log(">>>TEST", process.env.BASE_URL)
     const { errors } = useFormValidation();
     const { isButtonDisabled } = useSubmitButtonState(contactMessage, errors);
     const isSubmitting = ref(false)
@@ -106,10 +108,10 @@ export default {
       try {
         console.log('!!EMAIL OBJECT', emailObj)
         const res = await emailjs.send(
-          process.env.VUE_APP_EMAILJS_SERVICE_ID,
-          process.env.VUE_APP_EMAILJS_CONTACT_TEMPLATE_ID,
+          envConfig.VUE_APP_EMAILJS_SERVICE_ID,
+          envConfig.VUE_APP_EMAILJS_CONTACT_TEMPLATE_ID,
           emailObj,
-          process.env.VUE_APP_EMAILJS_USER_ID,
+          envConfig.VUE_APP_EMAILJS_USER_ID,
         )
         if (res.status === 200) {
           router.push({ name: 'Home' })
